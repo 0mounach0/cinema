@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequestMapping("api/cinema")
 @RestController
@@ -26,6 +27,11 @@ public class CinemaController {
     @GetMapping
     private List<Cinema> getAllCinemas() {
         return cinemaService.getAllCinemas();
+    }
+
+    @DeleteMapping("{id}")
+    private void deleteCinemas(@PathVariable("id") UUID id) {
+        cinemaService.deleteCinema(id);
     }
 
 }

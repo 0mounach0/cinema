@@ -27,6 +27,10 @@ public class CinemaService {
         return cinemaDao.insertCinema(newId, cinema);
     }
 
+    public int deleteCinema(UUID id) {
+        return cinemaDao.deleteCinema(id);
+    }
+
     public List<Cinema> getAllCinemas() {
         return cinemaDao.getAllCinemas();
     }

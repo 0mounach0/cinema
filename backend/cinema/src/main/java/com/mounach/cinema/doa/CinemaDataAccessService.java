@@ -20,19 +20,22 @@ public class CinemaDataAccessService implements CinemaDao {
 
     @Override
     public int insertCinema(UUID id, Cinema cinema) {
-        String sql = "" +
-                "INSERT INTO cinema (" +
-                " id, " +
-                " name, " +
-                " longitude, " +
-                " latitude) " +
-                "VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO cinema (id, name, longitude, latitude) VALUES (?, ?, ?, ?)";
         return jdbcTemplate.update(
                 sql,
                 id,
                 cinema.getName(),
                 cinema.getLongitude(),
                 cinema.getLatitute()
+        );
+    }
+
+    @Override
+    public int deleteCinema(UUID id) {
+        String sql = "DELETE FROM cinema WHERE id = ?";
+        return jdbcTemplate.update(
+                sql,
+                id.toString()
         );
     }
 

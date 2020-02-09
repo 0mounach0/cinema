@@ -9,6 +9,8 @@ public interface CinemaDao {
 
     int insertCinema(UUID id, Cinema cinema);
 
+    int deleteCinema(UUID id);
+
     List<Cinema> getAllCinemas();
 
 }
