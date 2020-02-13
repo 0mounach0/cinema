@@ -1,0 +1,48 @@
+.no-outline{
+    border: none;
+    outline:none;
+  }
+  .mt-3 {
+      margin-top: 0 !important;
+      font-family: 'Poppins',sans-serif;
+  
+  }
+  
+  #lang {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .navbar-brand img {
+        padding: 0;
+        margin: 0;
+    }
+  
+    .navbar-brand {
+        padding: 0;
+    }
+  
+    .navbar {
+        padding-top: 4px;
+        padding-bottom: 4px; 
+    }
+  
+    .lang-name {
+        font-size: 0.9em;
+        width: 100px !important;
+        margin-right: 10px;
+    }
+  
+    ::ng-deep .mat-form-field-infix {
+      width: 100px !important;
+    }
+  
+    #my-nav {
+        z-index: 1000;
+    }
+  
+    #cdk-overlay-0, .cdk-global-overlay-wrapper, .cdk-overlay-container {
+      z-index: 99999 !important;
+    }
+  

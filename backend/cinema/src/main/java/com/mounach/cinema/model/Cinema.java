@@ -1,24 +1,47 @@
 package com.mounach.cinema.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.istack.NotNull;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Cinema {
+@Entity
+public class Cinema implements Serializable {
 
-    private final UUID id;
+    @Id
+    @Column(updatable = false, nullable = false, unique=true, columnDefinition = "BINARY(16)")
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
+    private UUID id;
+
+    @Column
+    @NotNull
     private String name;
-    private double longitude;
-    private double latitute;
 
-    public Cinema(@JsonProperty("id") UUID id,
-                  @JsonProperty("name") String name,
+    @Column
+    @NotNull
+    private double longitude;
+
+    @Column
+    @NotNull
+    private double latitude;
+
+    public Cinema(@JsonProperty("name") String name,
                   @JsonProperty("longitude") double longitude,
-                  @JsonProperty("latitude") double latitute) {
-        this.id = id;
+                  @JsonProperty("latitude") double latitude) {
         this.name = name;
         this.longitude = longitude;
-        this.latitute = latitute;
+        this.latitude = latitude;
+    }
+
+    public Cinema() {
     }
 
     public UUID getId() {
@@ -41,21 +64,12 @@ public class Cinema {
         this.longitude = longitude;
     }
 
-    public double getLatitute() {
-        return latitute;
+    public double getLatitude() {
+        return latitude;
     }
 
-    public void setLatitute(double latitute) {
-        this.latitute = latitute;
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
-    @Override
-    public String toString() {
-        return "Cinema{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", longitude=" + longitude +
-                ", latitute=" + latitute +
-                '}';
-    }
 }

@@ -1,0 +1,39 @@
+<nav class="navbar shadow navbar-light bg-light fixed-top navbar-expand-lg mt-3" id="my-nav">
+    <a class="navbar-brand" href="#">
+      <img src="" width="80" alt="logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-8" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="navbar-list-8">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/pmdashboard" routerLinkActive="active">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/client-rates" routerLinkActive="active">Sales</a>
+        </li>
+      </ul>
+
+
+      <div class="right-side d-flex">
+        <ul class="navbar-nav">
+
+          <li *ngIf="false" class="nav-item dropdown" >
+            <div ngbDropdown class="d-inline-block">
+              <button class="btn" id="dropdownBasic1" ngbDropdownToggle>
+                <img src="#" width="45" class="rounded-circle">
+                <span class="username-top">  Mouad  </span>
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem routerLink="/profile">Compte</button>
+                <div class="dropdown-divider"></div>
+                <button ngbDropdownItem (click)="logout()" >Se déconnecter</button>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>

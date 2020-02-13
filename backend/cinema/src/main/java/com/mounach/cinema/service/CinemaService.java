@@ -1,38 +1,44 @@
 package com.mounach.cinema.service;
 
-import com.mounach.cinema.doa.CinemaDao;
 import com.mounach.cinema.model.Cinema;
+import com.mounach.cinema.repository.CinemaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class CinemaService {
 
-    private final CinemaDao cinemaDao;
-
     @Autowired
-    public CinemaService(@Qualifier("postgres") CinemaDao cinemaDao) {
-        this.cinemaDao = cinemaDao;
+    private CinemaRepository cinemaRepository;
+
+    public Iterable<Cinema> getAllCinemas() {
+        return cinemaRepository.findAll();
     }
 
-    public int insertCinema(Cinema cinema) {
-        UUID idTmp = null;
-        UUID newId = Optional.ofNullable(idTmp)
-                .orElse(UUID.randomUUID());
-        return cinemaDao.insertCinema(newId, cinema);
+    public Cinema getOneCinema(UUID id) {
+        return cinemaRepository.findById(id).get();
     }
 
-    public int deleteCinema(UUID id) {
-        return cinemaDao.deleteCinema(id);
+    public Cinema createCinema(Cinema cinema) {
+        return cinemaRepository.save(cinema);
     }
 
-    public List<Cinema> getAllCinemas() {
-        return cinemaDao.getAllCinemas();
+    public Cinema deleteCinema(UUID id) {
+        Cinema cinema = cinemaRepository.findById(id).get();
+        cinemaRepository.deleteById(id);
+        return cinema;
+    }
+
+    public Cinema updateCinema(UUID id, Cinema c) {
+        Cinema cinema = cinemaRepository.findById(id).get();
+        cinema.setName(c.getName());
+        cinema.setLongitude(c.getLongitude());
+        cinema.setLatitude(c.getLatitude());
+        cinemaRepository.save(cinema);
+        return cinema;
     }
 
 }

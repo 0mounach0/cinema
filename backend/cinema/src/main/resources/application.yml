@@ -1,6 +1,0 @@
-app:
-  datasource:
-    jdbc-url: jdbc:postgresql://68.183.77.180:5432/cinemadb
-    username: postgres
-    password: root
-    pool-size: 30

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -20,19 +21,31 @@ public class CinemaController {
         this.cinemaService = cinemaService;
     }
 
-    @PostMapping
-    private void insertCinema(@RequestBody Cinema cinema) {
-        cinemaService.insertCinema(cinema);
-    }
 
     @GetMapping
-    private List<Cinema> getAllCinemas() {
+    private @ResponseBody Iterable<Cinema> getAllCinemas() {
         return cinemaService.getAllCinemas();
     }
 
+    @GetMapping("{id}")
+    private @ResponseBody Cinema getOneCinema(@PathVariable("id") UUID id) {
+        System.out.println(id);
+        return cinemaService.getOneCinema(id);
+    }
+
+    @PostMapping
+    private @ResponseBody Cinema createCinema(@RequestBody Cinema cinema) {
+        return cinemaService.createCinema(cinema);
+    }
+
     @DeleteMapping("{id}")
-    private void deleteCinemas(@PathVariable("id") UUID id) {
-        cinemaService.deleteCinema(id);
+    private @ResponseBody Cinema deleteCinema(@PathVariable("id") UUID id) {
+        return cinemaService.deleteCinema(id);
+    }
+
+    @PutMapping("{id}")
+    private @ResponseBody Cinema updateCinema(@PathVariable("id") UUID id, @RequestBody Cinema cinema) {
+        return cinemaService.updateCinema(id, cinema);
     }
 
 }

@@ -27,10 +27,7 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 
-	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-	implementation 'org.postgresql:postgresql'
-	runtime('org.postgresql:postgresql')
-	implementation 'org.flywaydb:flyway-core:'
+	runtimeOnly 'mysql:mysql-connector-java'
 }
 
 test {
