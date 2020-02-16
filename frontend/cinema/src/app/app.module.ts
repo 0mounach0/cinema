@@ -9,12 +9,22 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { CinemasComponent } from './components/cinemas/cinemas.component';
+import { MoviesComponent } from './components/movies/movies.component';
+import { SessionsComponent } from './components/sessions/sessions.component';
+import {MatDividerModule} from '@angular/material/divider';
+import { FormsModule } from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    CinemasComponent,
+    MoviesComponent,
+    SessionsComponent
   ],
   imports: [
     BrowserModule,
@@ -23,9 +33,14 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     HttpClientModule,
     FlexLayoutModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDividerModule,
+    FormsModule,
+    MatSelectModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+}

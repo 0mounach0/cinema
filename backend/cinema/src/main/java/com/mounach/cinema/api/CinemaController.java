@@ -29,7 +29,6 @@ public class CinemaController {
 
     @GetMapping("{id}")
     private @ResponseBody Cinema getOneCinema(@PathVariable("id") UUID id) {
-        System.out.println(id);
         return cinemaService.getOneCinema(id);
     }
 

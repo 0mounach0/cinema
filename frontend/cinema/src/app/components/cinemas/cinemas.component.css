@@ -1,0 +1,47 @@
+.card {
+    max-width: 300px;
+    margin-bottom: 15px;
+}
+
+.delete, .edit {
+    font-size: 1.5em;
+    color: rgb(92, 87, 87);
+    margin: 5px;
+}
+
+.delete:hover {
+    color: rgb(66, 62, 62);
+    cursor: pointer;
+}
+
+.edit:hover {
+    color: rgb(66, 62, 62);
+    cursor: pointer;
+}
+
+.plus {
+    font-size: 2.5em;
+    color: rgb(90, 199, 81);
+}
+
+.search {
+    font-size: 2.5em;
+    color: rgb(91, 135, 194);
+}
+
+.search:hover {
+    color: rgb(46, 87, 141);
+    cursor: pointer;
+}
+
+.plus:hover {
+    color: rgb(54, 146, 46);
+    cursor: pointer;
+}
+
+.mat-divider-vertical {
+    margin-left: 15px;
+    margin-right: 15px;
+    color: red;
+    width: 10px;
+}

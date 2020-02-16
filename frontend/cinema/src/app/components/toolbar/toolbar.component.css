@@ -46,3 +46,6 @@
       z-index: 99999 !important;
     }
   
+    .admin {
+        margin-right: 10px;
+    }
