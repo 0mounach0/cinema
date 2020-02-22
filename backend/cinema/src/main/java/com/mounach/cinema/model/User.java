@@ -1,5 +1,6 @@
 package com.mounach.cinema.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -27,8 +28,7 @@ public class User implements Serializable {
     private String firstname;
     private String lastname;
     private int active;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Role> roles;
+    private String role;
 
     public User() {
     }
@@ -38,15 +38,15 @@ public class User implements Serializable {
                 @JsonProperty("password") String password,
                 @JsonProperty("firstname") String firstname,
                 @JsonProperty("lastname") String lastname,
-                @JsonProperty("active") int active) {
+                @JsonProperty("active") int active,
+                @JsonProperty("role") String role) {
         this.active = active;
         this.email = email;
         this.username = username;
-        this.roles = roles;
         this.firstname = firstname;
         this.lastname = lastname;
         this.password = password;
-        this.roles = roles;
+        this.role = role;
     }
 
     public UUID getId() {
@@ -57,12 +57,12 @@ public class User implements Serializable {
         return username;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public void setUsername(String username) {

@@ -16,6 +16,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import { FormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ToolbarComponent,
     CinemasComponent,
     MoviesComponent,
-    SessionsComponent
+    SessionsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

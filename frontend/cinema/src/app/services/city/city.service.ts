@@ -22,7 +22,8 @@ export class CityService {
         headers:  new HttpHeaders()
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json'),
-        observe: 'response'
+        observe: 'response',
+        withCredentials: true
       }
     );
     
@@ -37,7 +38,8 @@ export class CityService {
         headers:  new HttpHeaders()
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json'),
-        observe: 'response'
+        observe: 'response',
+        withCredentials: true
       }
     );
     

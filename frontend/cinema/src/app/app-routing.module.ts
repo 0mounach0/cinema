@@ -5,13 +5,15 @@ import { HomeComponent } from './components/home/home.component';
 import { CinemasComponent } from './components/cinemas/cinemas.component';
 import { MoviesComponent } from './components/movies/movies.component';
 import { SessionsComponent } from './components/sessions/sessions.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'cinemas', component: CinemasComponent },
   { path: 'movies', component: MoviesComponent },
-  { path: 'sessions', component: SessionsComponent }
+  { path: 'sessions', component: SessionsComponent },
+  { path: 'login', component: LoginComponent }
 ];
 
 
