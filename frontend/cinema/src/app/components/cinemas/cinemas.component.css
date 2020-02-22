@@ -45,3 +45,13 @@
     color: red;
     width: 10px;
 }
+
+.plus_city {
+    font-size: 2em;
+    color: rgb(77, 112, 74);
+}
+
+.plus_city:hover {
+    color: rgb(62, 68, 62);
+    cursor: pointer;
+}

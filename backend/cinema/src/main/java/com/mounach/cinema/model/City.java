@@ -12,6 +12,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "city")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class City implements Serializable {
 
     @Id
@@ -30,7 +31,7 @@ public class City implements Serializable {
     @OneToMany(mappedBy = "city", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     @JsonBackReference
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<Cinema> cinemas;
 
     public City(@JsonProperty("name") String name) {

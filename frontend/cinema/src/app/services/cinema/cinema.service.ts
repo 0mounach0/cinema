@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +34,36 @@ export class CinemaService {
   deleteCinema(id) {
     
     return this.httpClient.delete(this.API_URL + "cinema/" + id,
+      {
+        headers:  new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Accept', 'application/json'),
+        observe: 'response'
+      }
+    );
+    
+  }
+
+  /* ------------- */
+  createCinema(cinema) {
+
+    return this.httpClient.post(this.API_URL + "cinema" ,
+    JSON.stringify(cinema) ,
+      {
+        headers:  new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Accept', 'application/json'),
+        observe: 'response'
+      }
+    );
+    
+  }
+
+  /* ------------- */
+  updateCinema(cinema) {
+
+    return this.httpClient.put(this.API_URL + "cinema/" + cinema.id ,
+    JSON.stringify(cinema) ,
       {
         headers:  new HttpHeaders()
           .set('Content-Type', 'application/json')

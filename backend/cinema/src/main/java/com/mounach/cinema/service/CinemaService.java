@@ -35,6 +35,7 @@ public class CinemaService {
     public Cinema updateCinema(UUID id, Cinema c) {
         Cinema cinema = cinemaRepository.findById(id).get();
         cinema.setName(c.getName());
+        cinema.setDescription(c.getDescription());
         cinema.setLongitude(c.getLongitude());
         cinema.setLatitude(c.getLatitude());
         cinema.setCity(c.getCity());

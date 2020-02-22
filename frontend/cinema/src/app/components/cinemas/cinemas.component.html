@@ -8,8 +8,8 @@
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <i class="fas fa-search search"></i>
-                    <i class="fas fa-plus-square plus" (click)="openCreateModal(content)"></i>
-                    <ng-template #content let-c="close" let-d="dismiss">
+                    <i class="fas fa-plus-square plus" (click)="openCreateModal(content1)"></i>
+                    <ng-template #content1 let-c="close" let-d="dismiss">
                         <div class="modal-header">
                           <h4 class="modal-title" id="modal-basic-title">Create new cinema</h4>
                           <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -20,22 +20,39 @@
                           <form>
                             <div class="form-group">
                               <label for="name">Name</label>
-                              <input type="text" class="form-control" id="name" placeholder="Name">
+                              <input type="text" class="form-control" [(ngModel)]="cinema.name" name="name"
+                                id="name" placeholder="Name">
                             </div>
                             <div class="form-group">
                               <label for="desc">Description</label>
-                              <input type="text" class="form-control" id="desc" placeholder="Description">
+                              <input type="text" class="form-control" [(ngModel)]="cinema.description" name="description"
+                                id="desc" placeholder="Description">
                             </div>
                             <div class="form-group">
-                              <!--  -->
+                              <label for="exampleFormControlSelect1">City</label>
+                              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+                                <select class="form-control" id="city" name="city" 
+                                  [(ngModel)]="selectedCity" *ngIf="cityExist == true">
+                                  <option value="0">Select-a-city</option>
+                                  <option *ngFor="let city of cities" [value]="city.id">{{city.name}}</option>
+                                </select>
+                                <input type="text" class="form-control" name="city_name" *ngIf="cityExist == false" 
+                                  id="city_name" placeholder="City name" [(ngModel)]="newCity.name">
+                                <i class="far fa-plus-square plus_city" *ngIf="cityExist == true"
+                                  (click)="cityExist=false"></i>
+                                <i class="far fa-minus-square plus_city" *ngIf="cityExist == false"
+                                  (click)="cityExist=true"></i>
+                              </div>
                             </div>
                             <div class="form-group">
                               <label for="long">Longitude</label>
-                              <input type="text" class="form-control" id="long" placeholder="Longitude">
+                              <input type="text" class="form-control" [(ngModel)]="cinema.longitude" name="longitude" 
+                              id="long" placeholder="Longitude">
                             </div>
                             <div class="form-group">
                               <label for="lat">Latitude</label>
-                              <input type="text" class="form-control" id="lat" placeholder="Latitude">
+                              <input type="text" class="form-control" [(ngModel)]="cinema.latitude"  name="latitude"
+                              id="lat" placeholder="Latitude">
                             </div>
                           </form>
                         </div>
@@ -55,13 +72,12 @@
             <mat-card class="card">
                 <mat-card-header>
                   <mat-card-title>{{cinema.name}}</mat-card-title>
-                  <mat-card-subtitle>Paris 19eme</mat-card-subtitle>
+                  <mat-card-subtitle>{{cinema.city.name}}</mat-card-subtitle>
                 </mat-card-header>
                 <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
                 <mat-card-content>
                   <p>
-                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                    A small, agile.
+                    {{cinema.description}}
                   </p>
                 </mat-card-content>
                 <mat-card-actions>
@@ -79,7 +95,58 @@
                             </div>
                           </ng-template>
                           
-                        <i class="fas fa-edit edit"></i>
+                        <i class="fas fa-edit edit" (click)="openUpdateModal(content2, cinema)"></i>
+                        <ng-template #content2 let-c="close" let-d="dismiss">
+                          <div class="modal-header">
+                            <h4 class="modal-title" id="modal-basic-title">Update cinema</h4>
+                            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <form>
+                              <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" [(ngModel)]="cinema.name" name="name"
+                                  id="name" placeholder="Name">
+                              </div>
+                              <div class="form-group">
+                                <label for="desc">Description</label>
+                                <input type="text" class="form-control" [(ngModel)]="cinema.description" name="description"
+                                  id="desc" placeholder="Description">
+                              </div>
+                              <div class="form-group">
+                                <label for="city">City</label>
+                                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+                                  <select class="form-control" id="city" name="city" 
+                                    [(ngModel)]="selectedCity" *ngIf="cityExist == true">
+                                    <option value="0">Select-a-city</option>
+                                    <option *ngFor="let city of cities" [value]="city.id">{{city.name}}</option>
+                                  </select>
+                                  <input type="text" class="form-control" name="city_name" *ngIf="cityExist == false" 
+                                    id="city_name" placeholder="City name" [(ngModel)]="newCity.name">
+                                  <i class="far fa-plus-square plus_city" *ngIf="cityExist == true"
+                                    (click)="cityExist=false"></i>
+                                  <i class="far fa-minus-square plus_city" *ngIf="cityExist == false"
+                                    (click)="cityExist=true"></i>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="long">Longitude</label>
+                                <input type="text" class="form-control" [(ngModel)]="cinema.longitude" name="longitude" 
+                                id="long" placeholder="Longitude">
+                              </div>
+                              <div class="form-group">
+                                <label for="lat">Latitude</label>
+                                <input type="text" class="form-control" [(ngModel)]="cinema.latitude"  name="latitude"
+                                id="lat" placeholder="Latitude">
+                              </div>
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary" (click)="updateCinema()">Update</button>
+                          </div>
+                      </ng-template>
                     </div>
                 </mat-card-actions>
             </mat-card>

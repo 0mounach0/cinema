@@ -27,4 +27,20 @@ export class CityService {
     );
     
   }
+
+  /* ------------- */
+  createCity(city) {
+
+    return this.httpClient.post(this.API_URL + "city" ,
+    JSON.stringify(city) ,
+      {
+        headers:  new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Accept', 'application/json'),
+        observe: 'response'
+      }
+    );
+    
+  }
+
 }

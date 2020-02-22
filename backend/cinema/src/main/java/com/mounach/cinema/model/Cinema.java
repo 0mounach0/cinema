@@ -28,13 +28,25 @@ public class Cinema implements Serializable {
     @NotNull
     private String name;
 
-    @Column
-    @NotNull
-    private double longitude;
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     @Column
     @NotNull
-    private double latitude;
+    private String description;
+
+    @Column
+    @NotNull
+    private String longitude;
+
+    @Column
+    @NotNull
+    private String latitude;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "city_id", nullable = false)
@@ -42,10 +54,12 @@ public class Cinema implements Serializable {
     private City city;
 
     public Cinema(@JsonProperty("name") String name,
-                  @JsonProperty("longitude") double longitude,
-                  @JsonProperty("latitude") double latitude,
+                  @JsonProperty("description") String description,
+                  @JsonProperty("longitude") String longitude,
+                  @JsonProperty("latitude") String latitude,
                   @JsonProperty("city") City city) {
         this.name = name;
+        this.description = description;
         this.longitude = longitude;
         this.latitude = latitude;
         this.city = city;
@@ -67,11 +81,11 @@ public class Cinema implements Serializable {
         this.name = name;
     }
 
-    public double getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
@@ -83,11 +97,11 @@ public class Cinema implements Serializable {
         this.city = city;
     }
 
-    public double getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
