@@ -27,6 +27,10 @@ public class CustomUserDetailsService implements UserDetailsService {
         return userRepository.save(user);
     }
 
+    public User getUser(String username) {
+        return userRepository.findByUsername(username).get();
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> optionalUser = userRepository.findByUsername(username);

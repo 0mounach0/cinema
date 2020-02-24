@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { User } from 'src/app/models/user/user';
+import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
+import { Router } from '@angular/router';
+import { App } from 'src/app/models/app/app';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +13,12 @@ import { User } from 'src/app/models/user/user';
 export class LoginComponent implements OnInit {
 
   user: User = new User();
+  app: App = new App();
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    @Inject(SESSION_STORAGE) private storage: StorageService,
+    private router: Router) { }
 
   ngOnInit() {
   }
@@ -24,7 +31,6 @@ export class LoginComponent implements OnInit {
         .subscribe((response: any) => {
 
           resolve(response);
-          console.log("hopla");
 
         } ,
         err => {
@@ -39,11 +45,45 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
 
      this.loginService().then((response: any) => {
-      console.log(response);
+
+      if(response.body.status == "success") {
+
+        this.getUser().then((data: any) => {
+
+          this.app.username = data.body.username;
+          this.app.email = data.body.email;
+          this.app.role = data.body.role;
+          this.app.status = data.body.status;
+
+          this.storage.set("app", this.app);
+
+          this.router.navigate(['/home']);
+        });
+
+      }
+
     }).catch((err: any) => {
       console.log(err);
     }); 
 
+  }
+
+  getUser() {
+    let promise = new Promise((resolve, reject) => {
+
+        this.authService.getUser()
+        .subscribe((response: any) => {
+
+          resolve(response);
+
+        } ,
+        err => {
+          reject(err);
+        }
+      );
+    });
+    
+    return promise;
   }
 
 }

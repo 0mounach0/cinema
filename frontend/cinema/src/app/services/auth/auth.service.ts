@@ -25,6 +25,30 @@ export class AuthService {
       }
     );
   }
+
+  getUser() {
+    return this.httpClient.get(this.API_URL + "user",
+      {
+        headers:  new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Accept', 'application/json'),
+        observe: 'response',
+        withCredentials: true
+      }
+    );
+  }
+
+  logout() {
+    return this.httpClient.get(this.API_URL + "logout",
+      {
+        headers:  new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Accept', 'application/json'),
+        observe: 'response',
+        withCredentials: true
+      }
+    );
+  }
   
 
 }

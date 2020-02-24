@@ -58,8 +58,6 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/isNotLogged")
-                .permitAll()
                 .antMatchers("/api/user") // tmp
                 .permitAll()
                 .anyRequest()

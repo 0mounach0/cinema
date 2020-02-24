@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from 'src/app/services/home/home.service';
 
 @Component({
   selector: 'app-home',
@@ -8,31 +7,12 @@ import { HomeService } from 'src/app/services/home/home.service';
 })
 export class HomeComponent implements OnInit {
 
-  cinemas: Array<any> = new Array();
+  constructor() { }
 
-  constructor(private homeService: HomeService) { }
+  ngOnInit(){
 
-  ngOnInit(): void {
-    this.getAllCinemas();
   }
 
-  /* ----------------------- */
-  getAllCinemas() {
-
-    let promise = new Promise((resolve, reject) => {
-      this.homeService.getAllCinemas()
-     .subscribe((response: any) => {
-       console.log(response);
-       this.cinemas = response.body;
-       resolve(response);
-       } ,
-     err => {
-       console.log(  err.status );
-       reject(err);
-      });
-    });
-
-    return promise;
-  }
+ 
 
 }
