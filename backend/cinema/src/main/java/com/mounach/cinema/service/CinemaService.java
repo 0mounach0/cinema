@@ -36,6 +36,7 @@ public class CinemaService {
         Cinema cinema = cinemaRepository.findById(id).get();
         cinema.setName(c.getName());
         cinema.setDescription(c.getDescription());
+        cinema.setAddress(c.getAddress());
         cinema.setLongitude(c.getLongitude());
         cinema.setLatitude(c.getLatitude());
         cinema.setCity(c.getCity());

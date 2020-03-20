@@ -6,6 +6,9 @@ import { FormControl } from '@angular/forms';
 import { Cinema } from 'src/app/models/cinema/cinema';
 import { City } from 'src/app/models/city/city';
 
+import {Location, Appearance} from '@angular-material-extensions/google-maps-autocomplete';
+import PlaceResult = google.maps.places.PlaceResult;
+
 @Component({
   selector: 'app-cinemas',
   templateUrl: './cinemas.component.html',
@@ -20,6 +23,9 @@ export class CinemasComponent implements OnInit {
   cityExist: boolean = true;
   cinema: Cinema = new Cinema();
   newCity: City = new City();
+
+  public appearance = Appearance;
+  public selectedAddress: PlaceResult;
 
 
   /* ----------------------- */
@@ -216,6 +222,21 @@ export class CinemasComponent implements OnInit {
     });
 
     return promise;
+  }
+
+
+
+  //-----------------------
+
+  onAutocompleteSelected(result: PlaceResult) {
+    console.log('onAutocompleteSelected: ', result);
+    this.cinema.address = result.formatted_address;
+  }
+
+  onLocationSelected(location: Location) {
+    console.log('onLocationSelected: ', location);
+    this.cinema.latitude = location.latitude.toString();
+    this.cinema.longitude = location.longitude.toString();
   }
 
 }

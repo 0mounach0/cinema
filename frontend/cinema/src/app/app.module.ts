@@ -18,6 +18,9 @@ import {MatSelectModule} from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/login/login.component';
 import { StorageServiceModule } from 'angular-webstorage-service';
+import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
+import { AgmCoreModule } from '@agm/core';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +44,12 @@ import { StorageServiceModule } from 'angular-webstorage-service';
     FormsModule,
     MatSelectModule,
     BrowserAnimationsModule,
-    StorageServiceModule
+    StorageServiceModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDl9Nq14tlbjMSBDk7vKiYB3_eGyxDn_KM',
+      libraries: ['places']
+    }),
+    MatGoogleMapsAutocompleteModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

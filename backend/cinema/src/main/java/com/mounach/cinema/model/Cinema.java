@@ -28,17 +28,13 @@ public class Cinema implements Serializable {
     @NotNull
     private String name;
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     @Column
     @NotNull
     private String description;
+
+    @Column
+    @NotNull
+    private String address;
 
     @Column
     @NotNull
@@ -55,11 +51,13 @@ public class Cinema implements Serializable {
 
     public Cinema(@JsonProperty("name") String name,
                   @JsonProperty("description") String description,
+                  @JsonProperty("address") String address,
                   @JsonProperty("longitude") String longitude,
                   @JsonProperty("latitude") String latitude,
                   @JsonProperty("city") City city) {
         this.name = name;
         this.description = description;
+        this.address = address;
         this.longitude = longitude;
         this.latitude = latitude;
         this.city = city;
@@ -79,6 +77,22 @@ public class Cinema implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getLongitude() {

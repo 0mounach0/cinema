@@ -44,7 +44,13 @@
                                   (click)="cityExist=true"></i>
                               </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" id="auto-complete">
+                                    <mat-google-maps-autocomplete 
+                                      (onAutocompleteSelected)="onAutocompleteSelected($event)"
+                                      (onLocationSelected)="onLocationSelected($event)">
+                                    </mat-google-maps-autocomplete>
+                          </div>
+                            <!-- <div class="form-group">
                               <label for="long">Longitude</label>
                               <input type="text" class="form-control" [(ngModel)]="cinema.longitude" name="longitude" 
                               id="long" placeholder="Longitude">
@@ -53,7 +59,7 @@
                               <label for="lat">Latitude</label>
                               <input type="text" class="form-control" [(ngModel)]="cinema.latitude"  name="latitude"
                               id="lat" placeholder="Latitude">
-                            </div>
+                            </div> -->
                           </form>
                         </div>
                         <div class="modal-footer">

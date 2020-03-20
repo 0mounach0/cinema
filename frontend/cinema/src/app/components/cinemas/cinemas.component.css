@@ -55,3 +55,9 @@
     color: rgb(62, 68, 62);
     cursor: pointer;
 }
+
+::ng-deep .modal { z-index: 1001 !important;} 
+
+::ng-deep .modal-backdrop {z-index: 1000 !important;}
+
+::ng-deep .pac-container {z-index: 1055 !important;}

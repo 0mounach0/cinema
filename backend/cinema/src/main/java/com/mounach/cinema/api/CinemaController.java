@@ -8,6 +8,7 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,7 +35,6 @@ public class CinemaController {
     public CinemaController(CinemaService cinemaService) {
         this.cinemaService = cinemaService;
     }
-
 
     @GetMapping
     private @ResponseBody Iterable<Cinema> getAllCinemas() {

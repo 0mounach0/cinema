@@ -39,8 +39,8 @@ export class ToolbarComponent implements OnInit {
 
         this.app.error = true; 
         this.app.email = null; 
-        this.app.role = null; 
-        this.app.status = "NOT LOGGED"; 
+        this.app.status = 'NOT AUTHORIZED';
+        this.app.username = '*** NONE ***'; 
         this.app.role = null;
         
         this.storage.set("app", this.app);
