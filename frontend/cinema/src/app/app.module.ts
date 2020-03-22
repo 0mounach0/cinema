@@ -20,6 +20,7 @@ import { LoginComponent } from './components/login/login.component';
 import { StorageServiceModule } from 'angular-webstorage-service';
 import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
 import { AgmCoreModule } from '@agm/core';
+import { CinemaComponent } from './components/cinema/cinema.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { AgmCoreModule } from '@agm/core';
     CinemasComponent,
     MoviesComponent,
     SessionsComponent,
-    LoginComponent
+    LoginComponent,
+    CinemaComponent
   ],
   imports: [
     BrowserModule,

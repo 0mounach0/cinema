@@ -30,6 +30,21 @@ export class CinemaService {
     
   }
 
+  /* ------------- */
+  getCinemaTheaters(id) {
+    
+    return this.httpClient.get(this.API_URL + "cinema/" + id + "/theaters",
+      {
+        headers:  new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Accept', 'application/json'),
+        observe: 'response',
+        withCredentials: true
+      }
+    );
+    
+  }
+
 
   /* ------------- */
   deleteCinema(id) {

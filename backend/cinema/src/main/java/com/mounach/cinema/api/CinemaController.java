@@ -1,6 +1,7 @@
 package com.mounach.cinema.api;
 
 import com.mounach.cinema.model.Cinema;
+import com.mounach.cinema.model.Theater;
 import com.mounach.cinema.service.CinemaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -59,6 +60,11 @@ public class CinemaController {
     @PutMapping("{id}")
     private @ResponseBody Cinema updateCinema(@PathVariable("id") UUID id, @RequestBody Cinema cinema) {
         return cinemaService.updateCinema(id, cinema);
+    }
+
+    @GetMapping("{id}/theaters")
+    private @ResponseBody Iterable<Theater> getCinemaTheaters(@PathVariable("id") UUID id) {
+        return cinemaService.getCinemaTheaters(id);
     }
 
     @PostMapping("/upload")

@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "cinema")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Cinema implements Serializable {
 
     @Id
@@ -48,6 +50,12 @@ public class Cinema implements Serializable {
     @JoinColumn(name = "city_id", nullable = false)
     @JsonManagedReference
     private City city;
+
+
+    @OneToMany(mappedBy = "cinema", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<Theater> theaters;
 
     public Cinema(@JsonProperty("name") String name,
                   @JsonProperty("description") String description,
@@ -119,4 +127,11 @@ public class Cinema implements Serializable {
         this.latitude = latitude;
     }
 
+    public List<Theater> getTheaters() {
+        return theaters;
+    }
+
+    public void setTheaters(List<Theater> theaters) {
+        this.theaters = theaters;
+    }
 }
