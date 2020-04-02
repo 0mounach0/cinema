@@ -8,6 +8,7 @@ import { City } from 'src/app/models/city/city';
 
 import {Location, Appearance} from '@angular-material-extensions/google-maps-autocomplete';
 import PlaceResult = google.maps.places.PlaceResult;
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-cinemas',

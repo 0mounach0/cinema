@@ -45,6 +45,36 @@ export class CinemaService {
     
   }
 
+  /* ------------- */
+  getCinemaSession(id) {
+    
+    return this.httpClient.get(this.API_URL + "cinema/" + id + "/sessions",
+      {
+        headers:  new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Accept', 'application/json'),
+        observe: 'response',
+        withCredentials: true
+      }
+    );
+    
+  }
+
+  /* ------------- */
+  getOneCinema(id) {
+    
+    return this.httpClient.get(this.API_URL + "cinema/" + id ,
+      {
+        headers:  new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Accept', 'application/json'),
+        observe: 'response',
+        withCredentials: true
+      }
+    );
+    
+  }
+
 
   /* ------------- */
   deleteCinema(id) {

@@ -1,11 +1,8 @@
 package com.mounach.cinema.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.mounach.cinema.repository.CinemaRepository;
 import com.sun.istack.NotNull;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -56,6 +53,7 @@ public class Cinema implements Serializable {
             cascade = CascadeType.ALL)
     @JsonBackReference
     private List<Theater> theaters;
+
 
     public Cinema(@JsonProperty("name") String name,
                   @JsonProperty("description") String description,
@@ -134,4 +132,5 @@ public class Cinema implements Serializable {
     public void setTheaters(List<Theater> theaters) {
         this.theaters = theaters;
     }
+
 }

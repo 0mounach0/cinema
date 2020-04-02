@@ -1,5 +1,7 @@
 package com.mounach.cinema.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
@@ -7,10 +9,12 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "theater")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Theater implements Serializable {
 
     @Id
@@ -35,6 +39,11 @@ public class Theater implements Serializable {
     @JsonManagedReference
     private Cinema cinema;
 
+    @OneToMany(mappedBy = "theater", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<Session> session;
+
 
     public Theater() {
     }
@@ -47,6 +56,10 @@ public class Theater implements Serializable {
         this.name = name;
         this.num_places = num_places;
         this.cinema = cinema;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     public String getName() {
@@ -71,5 +84,13 @@ public class Theater implements Serializable {
 
     public void setCinema(Cinema cinema) {
         this.cinema = cinema;
+    }
+
+    public List<Session> getSession() {
+        return session;
+    }
+
+    public void setSession(List<Session> session) {
+        this.session = session;
     }
 }

@@ -1,8 +1,10 @@
 package com.mounach.cinema.service;
 
 import com.mounach.cinema.model.Cinema;
+import com.mounach.cinema.model.Session;
 import com.mounach.cinema.model.Theater;
 import com.mounach.cinema.repository.CinemaRepository;
+import com.mounach.cinema.repository.SessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

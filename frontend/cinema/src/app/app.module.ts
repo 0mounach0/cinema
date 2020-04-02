@@ -21,6 +21,23 @@ import { StorageServiceModule } from 'angular-webstorage-service';
 import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
 import { AgmCoreModule } from '@agm/core';
 import { CinemaComponent } from './components/cinema/cinema.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { TheatersComponent } from './components/theaters/theaters.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+
+import { DateTimeAdapter, OWL_DATE_TIME_FORMATS, OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
+import { MomentDateTimeAdapter } from 'ng-pick-datetime-moment';
+
+export const MY_CUSTOM_FORMATS = {
+  fullPickerInput: 'YYYY-MM-DD HH:mm:ss',
+  parseInput: 'YYYY-MM-DD HH:mm:ss',
+  datePickerInput: 'YYYY-MM-DD HH:mm:ss',
+  timePickerInput: 'LT',
+  monthYearLabel: 'MMM YYYY',
+  dateA11yLabel: 'LL',
+  monthYearA11yLabel: 'MMMM YYYY'
+  };
 
 
 @NgModule({
@@ -32,7 +49,8 @@ import { CinemaComponent } from './components/cinema/cinema.component';
     MoviesComponent,
     SessionsComponent,
     LoginComponent,
-    CinemaComponent
+    CinemaComponent,
+    TheatersComponent
   ],
   imports: [
     BrowserModule,
@@ -52,8 +70,15 @@ import { CinemaComponent } from './components/cinema/cinema.component';
       libraries: ['places']
     }),
     MatGoogleMapsAutocompleteModule,
+    MatTabsModule,
+    MatExpansionModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule
   ],
-  providers: [],
+  providers: [
+    //{ provide: DateTimeAdapter, useClass: MomentDateTimeAdapter, deps: [OWL_DATE_TIME_LOCALE] },
+    //{ provide: OWL_DATE_TIME_FORMATS, useValue: MY_CUSTOM_FORMATS }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

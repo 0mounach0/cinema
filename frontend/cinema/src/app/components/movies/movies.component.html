@@ -1,1 +1,36 @@
-<p>movies works!</p>
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+
+    <div class="container h-100">
+        <div class="d-flex justify-content-center h-100">
+          <div class="searchbar">
+            <input class="search_input" type="text" (keyup.enter)="searchMovies()" [(ngModel)]="query" placeholder="Search...">
+            <a class="search_icon"><i class="fas fa-search" (click)="searchMovies()"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutAlign="space-around stretch" fxLayoutGap="15px">
+
+        <ng-container *ngFor="let movie of movies">
+
+            <div class="card">
+                <img [src]="'https://image.tmdb.org/t/p/w500'+movie.poster_path" 
+                     class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{movie.original_title}}</h5>
+                    <p class="card-text">
+                      Release date : 
+                      <span class="badge badge-info">{{movie.release_date}}</span>
+                    </p>
+                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                </div>
+            </div>
+
+        </ng-container>
+
+      </div>
+
+    
+
+</div>
+

@@ -35,6 +35,7 @@ public class TheaterService {
     public Theater updateTheater(UUID id, Theater t) {
         Theater theater = theaterRepository.findById(id).get();
         theater.setName(t.getName());
+        theater.setNum_places(t.getNum_places());
         theater.setCinema(t.getCinema());
         theaterRepository.save(theater);
         return theater;

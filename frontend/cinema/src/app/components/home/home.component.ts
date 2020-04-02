@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
          '<h5>' +
           c.name.toString()
         +'<h5>'+
-        '<a href="'+location.origin+'/cinemas" target="_blank" >Link Opens in New Tab</a>'
+        '<a href="'+location.origin+'/cinema/'+c.id+'" target="_blank" >Link Opens in New Tab</a>'
        )
        .addTo(cinemaMap)
        .openPopup();  

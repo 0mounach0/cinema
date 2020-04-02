@@ -1,0 +1,80 @@
+<div fxLayout="row wrap" fxLayoutAlign="space-around stretch" fxLayoutGap="15px">
+    <i class="far fa-plus-square plus_city" (click)="openCreateModal(content1)"></i>
+                <ng-template #content1 let-c="close" let-d="dismiss">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">Create new theater</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" [(ngModel)]="theater.name" name="name"
+                          id="name" placeholder="Name">
+                      </div>
+                      <div class="form-group">
+                        <label for="desc">Number of places</label>
+                        <input type="number" class="form-control" [(ngModel)]="theater.num_places" name="num_places"
+                          id="num_places" min="10" max="50">
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" (click)="createTheater()">Create</button>
+                  </div>
+              </ng-template>
+
+    <ng-container *ngFor="let theater of theaters">
+
+        <div class="card bg-light theater">
+            <div class="card-body">
+              <h5 class="card-title">{{theater.name}}</h5>
+              <p class="card-text">number of places <span class="badge badge-info">{{theater.num_places}}</span></p>
+              <div fxLayout="row" fxLayoutAlign="end stretch" >
+                <i class="fas fa-trash-alt delete" (click)="openDeleteModal(content)"></i>
+                <ng-template #content let-c="close" let-d="dismiss">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">Are you sure you want to delete it !</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" (click)="deleteTheater(theater.id)">Confirm delete</button>
+                  </div>
+                </ng-template>
+                <i class="fas fa-edit edit" (click)="openUpdateModal(content2, theater)"></i>
+                <ng-template #content2 let-c="close" let-d="dismiss">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">Update Theater</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" [(ngModel)]="theater.name" name="name"
+                          id="name" placeholder="Name">
+                      </div>
+                      <div class="form-group">
+                        <label for="desc">Number of places</label>
+                        <input type="number" class="form-control" [(ngModel)]="theater.num_places" name="num_places"
+                        id="num_places" min="10" max="50">
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" (click)="updateTheater()">Update</button>
+                  </div>
+              </ng-template>
+              </div>
+            </div>
+        </div>
+
+    </ng-container>
+
+  </div>

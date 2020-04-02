@@ -1,1 +1,105 @@
-<p>sessions works!</p>
+<div fxLayout="row wrap" fxLayoutAlign="space-around stretch" fxLayoutGap="15px">
+    <i class="far fa-plus-square plus_city" (click)="openCreateModal(content1)"></i>
+                <ng-template #content1 let-c="close" let-d="dismiss">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">Create new Session</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" [(ngModel)]="session.name" name="name"
+                          id="name" placeholder="Name">
+                      </div>
+                      <div class="form-group">
+                        <label for="movie_id">movie_id</label>
+                        <input type="number" class="form-control" [(ngModel)]="session.movie_id" name="movie_id"
+                          id="movie_id" >
+                      </div>
+
+                      <div class="form-group">
+                        <select class="form-control" id="theater" name="theater" 
+                                    [(ngModel)]="selectedTheater">
+                                    <option value="0">Select-a-theater</option>
+                                    <option *ngFor="let theater of theaters" [value]="theater.id">{{theater.name}}</option>
+                        </select>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="start_date">Start date</label>
+                        <input [owlDateTime]="dt1" id="start_date" name="start_date" 
+                        [(ngModel)]="session.start_date" placeholder="Date Time">
+                        <span [owlDateTimeTrigger]="dt1"><i class="fa fa-calendar"></i></span>
+                        <owl-date-time #dt1></owl-date-time>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="end_date">End date</label>
+                        <input [owlDateTime]="dt2" id="end_date" name="end_date" 
+                        [(ngModel)]="session.end_date"  placeholder="Date Time">
+                        <span [owlDateTimeTrigger]="dt2"><i class="fa fa-calendar"></i></span>
+                        <owl-date-time #dt2></owl-date-time>
+                      </div>
+                      
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" (click)="createSession()">Create</button>
+                  </div>
+              </ng-template>
+
+    <ng-container *ngFor="let session of sessions">
+
+        <div class="card bg-light theater">
+            <div class="card-body">
+              <h5 class="card-title">{{session.name}}</h5>
+              <p class="card-text">movie id <span class="badge badge-info">{{session.movie_id}}</span></p>
+              <div fxLayout="row" fxLayoutAlign="end stretch" >
+                <i class="fas fa-trash-alt delete" (click)="openDeleteModal(content)"></i>
+                <ng-template #content let-c="close" let-d="dismiss">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">Are you sure you want to delete it !</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" (click)="deleteTheater(theater.id)">Confirm delete</button>
+                  </div>
+                </ng-template>
+                <i class="fas fa-edit edit" (click)="openUpdateModal(content2, theater)"></i>
+                <ng-template #content2 let-c="close" let-d="dismiss">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">Update Session</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" [(ngModel)]="session.name" name="name"
+                          id="name" placeholder="Name">
+                      </div>
+                      <div class="form-group">
+                        <label for="desc">movie_id</label>
+                        <input type="number" class="form-control" [(ngModel)]="session.movie_id" name="movie_id"
+                        id="movie_id">
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" (click)="updateSession()">Update</button>
+                  </div>
+              </ng-template>
+              </div>
+            </div>
+        </div>
+
+    </ng-container>
+
+  </div>

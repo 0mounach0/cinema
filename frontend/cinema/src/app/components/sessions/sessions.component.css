@@ -1,0 +1,53 @@
+.card-cine {
+    width: 100%;
+}
+
+.theater {
+    max-width: 300px;
+}
+
+.delete, .edit {
+    font-size: 1.5em;
+    color: rgb(92, 87, 87);
+    margin: 5px;
+}
+
+.delete:hover {
+    color: rgb(66, 62, 62);
+    cursor: pointer;
+}
+
+.edit:hover {
+    color: rgb(66, 62, 62);
+    cursor: pointer;
+}
+
+.plus {
+    font-size: 2.5em;
+    color: rgb(90, 199, 81);
+}
+
+.plus:hover {
+    color: rgb(54, 146, 46);
+    cursor: pointer;
+}
+
+.plus_city {
+    font-size: 2em;
+    color: rgb(77, 112, 74);
+}
+
+.plus_city:hover {
+    color: rgb(62, 68, 62);
+    cursor: pointer;
+}
+
+.datetime {
+    height: 250px;
+}
+
+::ng-deep .modal { z-index: 1000 !important;} 
+
+::ng-deep .modal-backdrop {z-index: 1000 !important;}
+
+::ng-deep .pac-container {z-index: 1055 !important;}

@@ -50,16 +50,6 @@
                                       (onLocationSelected)="onLocationSelected($event)">
                                     </mat-google-maps-autocomplete>
                           </div>
-                            <!-- <div class="form-group">
-                              <label for="long">Longitude</label>
-                              <input type="text" class="form-control" [(ngModel)]="cinema.longitude" name="longitude" 
-                              id="long" placeholder="Longitude">
-                            </div>
-                            <div class="form-group">
-                              <label for="lat">Latitude</label>
-                              <input type="text" class="form-control" [(ngModel)]="cinema.latitude"  name="latitude"
-                              id="lat" placeholder="Latitude">
-                            </div> -->
                           </form>
                         </div>
                         <div class="modal-footer">
@@ -137,15 +127,11 @@
                                     (click)="cityExist=true"></i>
                                 </div>
                               </div>
-                              <div class="form-group">
-                                <label for="long">Longitude</label>
-                                <input type="text" class="form-control" [(ngModel)]="cinema.longitude" name="longitude" 
-                                id="long" placeholder="Longitude">
-                              </div>
-                              <div class="form-group">
-                                <label for="lat">Latitude</label>
-                                <input type="text" class="form-control" [(ngModel)]="cinema.latitude"  name="latitude"
-                                id="lat" placeholder="Latitude">
+                              <div class="form-group" id="auto-complete">
+                                <mat-google-maps-autocomplete [address]="cinema.address"
+                                  (onAutocompleteSelected)="onAutocompleteSelected($event)"
+                                  (onLocationSelected)="onLocationSelected($event)">
+                                </mat-google-maps-autocomplete>
                               </div>
                             </form>
                           </div>
