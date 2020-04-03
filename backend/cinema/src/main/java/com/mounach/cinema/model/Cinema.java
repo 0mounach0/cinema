@@ -133,4 +133,17 @@ public class Cinema implements Serializable {
         this.theaters = theaters;
     }
 
+    @Override
+    public String toString() {
+        return "Cinema{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", address='" + address + '\'' +
+                ", longitude='" + longitude + '\'' +
+                ", latitude='" + latitude + '\'' +
+                ", city=" + city +
+                ", theaters=" + theaters +
+                '}';
+    }
 }

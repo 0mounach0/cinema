@@ -32,6 +32,21 @@ export class SessionService {
   }
 
   /* ------------- */
+  getOneSession(id) {
+    
+    return this.httpClient.get(this.API_URL + "session/" + id ,
+      {
+        headers:  new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Accept', 'application/json'),
+        observe: 'response',
+        withCredentials: true
+      }
+    );
+    
+  }
+
+  /* ------------- */
   updateSession(session) {
 
     return this.httpClient.put(this.API_URL + "session/" + session.id ,

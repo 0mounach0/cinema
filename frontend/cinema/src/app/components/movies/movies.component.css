@@ -48,3 +48,10 @@
         height: 500px;
         margin-top: 15px;
     }
+
+    .card_movie:hover {
+        cursor: pointer;
+        opacity: 0.5;
+    }
+
+

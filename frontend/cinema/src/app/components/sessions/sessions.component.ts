@@ -93,7 +93,7 @@ export class SessionsComponent implements OnInit {
 
   //--------------------------------
   openCreateModal(content) {
-    this.modalService.open(content, { size: 'lg', scrollable: true });
+    this.modalService.open(content, { size: 'xl', scrollable: true });
   }
 
 
@@ -228,6 +228,18 @@ export class SessionsComponent implements OnInit {
     });
 
     return promise;
+  }
+
+  //---------------------
+  pickMovie(movie) {
+    this.session.movie_id = movie.id;
+    this.session.original_title = movie.original_title;
+    this.session.overview = movie.overview;
+    this.session.poster_path = movie.poster_path;
+    this.session.release_date = movie.release_date;
+    this.session.status = movie.status;
+    this.session.title = movie.title;
+    this.session.vote_average = movie.vote_average.toString();
   }
 
 }

@@ -1,0 +1,12 @@
+.fa-tv {
+    font-size: 100px;
+}
+
+.fa-couch {
+    font-size: 20px;
+}
+
+.fa-couch:hover {
+    cursor: pointer;
+    color: green;
+}

@@ -93,4 +93,15 @@ public class Theater implements Serializable {
     public void setSession(List<Session> session) {
         this.session = session;
     }
+
+    @Override
+    public String toString() {
+        return "Theater{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", num_places=" + num_places +
+                ", cinema=" + cinema +
+                ", session=" + session +
+                '}';
+    }
 }

@@ -51,3 +51,12 @@
 ::ng-deep .modal-backdrop {z-index: 1000 !important;}
 
 ::ng-deep .pac-container {z-index: 1055 !important;}
+
+.cdk-overlay-container {
+    z-index: 9999999 !important;
+}
+.cdk-global-overlay-wrapper, .cdk-overlay-container {
+    z-index: 9999999 !important;
+}
+
+ 

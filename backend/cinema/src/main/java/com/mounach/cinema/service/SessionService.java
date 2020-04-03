@@ -3,6 +3,7 @@ package com.mounach.cinema.service;
 import com.mounach.cinema.model.Cinema;
 import com.mounach.cinema.model.Session;
 import com.mounach.cinema.model.Theater;
+import com.mounach.cinema.model.Ticket;
 import com.mounach.cinema.repository.CinemaRepository;
 import com.mounach.cinema.repository.SessionRepository;
 import com.mounach.cinema.repository.TheaterRepository;
@@ -40,7 +41,13 @@ public class SessionService {
 
     public Session updateSession(UUID id, Session s) {
         Session session = sessionRepository.findById(id).get();
-        session.setName(s.getName());
+        session.setOriginal_title(s.getOriginal_title());
+        session.setOverview(s.getOverview());
+        session.setPoster_path(s.getPoster_path());
+        session.setRelease_date(s.getRelease_date());
+        session.setStatus(s.getStatus());
+        session.setTitle(s.getTitle());
+        session.setVote_average(s.getVote_average());
         session.setTheater(s.getTheater());
         session.setMovie_id(s.getMovie_id());
         session.setStart_date(s.getStart_date());
@@ -53,6 +60,11 @@ public class SessionService {
         Cinema cinema = cinemaRepository.findById(id).get();
         Iterable<Session> sessions = sessionRepository.findByTheater_Cinema(cinema);
         return sessions;
+    }
+
+    public Iterable<Ticket> getSessionTickets(UUID id) {
+        Session session = sessionRepository.findById(id).get();
+        return session.getTickets();
     }
 
 }

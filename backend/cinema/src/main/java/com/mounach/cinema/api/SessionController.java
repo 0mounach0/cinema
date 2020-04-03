@@ -2,6 +2,7 @@ package com.mounach.cinema.api;
 
 import com.mounach.cinema.model.Session;
 import com.mounach.cinema.model.Theater;
+import com.mounach.cinema.model.Ticket;
 import com.mounach.cinema.service.SessionService;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,11 @@ public class SessionController {
     @GetMapping("{id}")
     private @ResponseBody Session getOneSession(@PathVariable("id") UUID id) {
         return sessionService.getOneSession(id);
+    }
+
+    @GetMapping("{id}/tickets")
+    private @ResponseBody Iterable<Ticket> getSessionTickets(@PathVariable("id") UUID id) {
+        return sessionService.getSessionTickets(id);
     }
 
     @PostMapping

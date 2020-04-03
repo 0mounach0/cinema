@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MovieService } from 'src/app/services/movie/movie.service';
 import { Router } from '@angular/router';
 import { Movie } from 'src/app/models/movie/movie';
@@ -13,6 +13,8 @@ export class MoviesComponent implements OnInit {
   movies: Array<Movie> = new Array();
   query: String;
 
+  @Output() onMoviePicked: EventEmitter<any> = new EventEmitter<any>();
+
   constructor(
     private movieService: MovieService,
     private router: Router
@@ -21,6 +23,10 @@ export class MoviesComponent implements OnInit {
   ngOnInit() {
   }
 
+  //-------------------
+  pickMovie(movie) {
+    this.onMoviePicked.emit(movie);
+  }
 
   /* ----------------------- */
   searchMovies() {

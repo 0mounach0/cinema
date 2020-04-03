@@ -1,0 +1,26 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" >
+
+    <div class="card card-cine">
+        <div fxLayout="row" fxLayoutAlign="start stretch" >
+            <div fxFlex="30">
+                <img [src]="'https://image.tmdb.org/t/p/w500'+session.poster_path" class="card-img" alt="...">
+              </div>
+              <div fxFlex="40">
+                <div class="card-body">
+                  <h5 class="card-title">{{session.title}}</h5>
+                  <p class="card-text">{{session.overview}}</p>
+                  <p class="card-text"><small class="text-muted">{{session.start_date}}</small></p>
+                </div>
+              </div>
+              <div fxFlex="30" fxLayout="row wrap" fxLayoutAlign="center center">
+                    <ng-container *ngFor='let in of counter(session.theater?.num_places) ;let i = index'>
+                        <span fxFlex="10"><i class="fas fa-couch"></i></span>
+                    </ng-container>
+                    <span fxFlex="100" fxLayout="row" fxLayoutAlign="center center">
+                        <i class="fas fa-tv"></i>
+                    </span>
+              </div>
+          </div>
+      </div>
+
+</div>
