@@ -219,7 +219,6 @@ public class Session implements Serializable {
                 ", start_date=" + start_date +
                 ", end_date=" + end_date +
                 ", theater=" + theater +
-                ", tickets=" + tickets +
                 '}';
     }
 }

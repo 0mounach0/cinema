@@ -42,7 +42,7 @@ public class Theater implements Serializable {
     @OneToMany(mappedBy = "theater", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     @JsonBackReference
-    private List<Session> session;
+    private List<Session> sessions;
 
 
     public Theater() {
@@ -86,12 +86,12 @@ public class Theater implements Serializable {
         this.cinema = cinema;
     }
 
-    public List<Session> getSession() {
-        return session;
+    public List<Session> getSessions() {
+        return sessions;
     }
 
-    public void setSession(List<Session> session) {
-        this.session = session;
+    public void setSessions(List<Session> sessions) {
+        this.sessions = sessions;
     }
 
     @Override
@@ -101,7 +101,6 @@ public class Theater implements Serializable {
                 ", name='" + name + '\'' +
                 ", num_places=" + num_places +
                 ", cinema=" + cinema +
-                ", session=" + session +
                 '}';
     }
 }

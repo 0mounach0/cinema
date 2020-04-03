@@ -143,7 +143,6 @@ public class Cinema implements Serializable {
                 ", longitude='" + longitude + '\'' +
                 ", latitude='" + latitude + '\'' +
                 ", city=" + city +
-                ", theaters=" + theaters +
                 '}';
     }
 }

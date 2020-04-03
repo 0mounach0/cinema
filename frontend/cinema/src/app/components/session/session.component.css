@@ -6,7 +6,11 @@
     font-size: 20px;
 }
 
-.fa-couch:hover {
+.disable {
+    opacity: 0.5;
+}
+
+.enable:hover {
     cursor: pointer;
     color: green;
 }

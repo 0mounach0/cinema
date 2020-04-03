@@ -65,7 +65,6 @@ public class City implements Serializable {
         return "City{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", cinemas=" + cinemas +
                 '}';
     }
 }
