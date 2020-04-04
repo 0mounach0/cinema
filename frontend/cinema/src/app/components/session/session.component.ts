@@ -7,6 +7,9 @@ import { TicketService } from 'src/app/services/ticket/ticket.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { QrcodeService } from 'src/app/services/qrcode/qrcode.service';
 
+/* ------ */
+declare let paypal: any;
+
 @Component({
   selector: 'app-session',
   templateUrl: './session.component.html',
@@ -21,6 +24,10 @@ export class SessionComponent implements OnInit {
 
   public imagePath;
   imgURL: any;
+
+  addScript: boolean = false;
+  paypalLoad: boolean = true;
+  paypalActions: any;
 
   constructor(
     private router: Router,
@@ -126,6 +133,7 @@ export class SessionComponent implements OnInit {
 
   //--------------------------------
   openCreateModal(content, i) {
+    this.afterModalOpen();
     this.ticket.seat_num = i;
     this.ticket.session = this.session;
     this.modalService.open(content, { size: 'lg', scrollable: true });
@@ -161,6 +169,91 @@ export class SessionComponent implements OnInit {
 
     });
 
+  }
+
+  //-----------------paypal----------------------
+
+  /* ------- */
+  addPaypalScript() {
+    this.addScript = true;
+    return new Promise((resolve, reject) => {
+      let scripttagElement = document.createElement('script');    
+      scripttagElement.src = 'https://www.paypal.com/sdk/js?client-id=ASK3BrtqFsn8khmF5CcJnSDEXdUbrlABe65RgmmkCvrsyuGBRWCIWGwSKz21aob4XgjxgJ0Z6eLlGZOy&currency=EUR';
+      scripttagElement.onload = resolve;
+      document.body.appendChild(scripttagElement);
+    })
+  }
+
+  /* --------- */
+  afterModalOpen() {
+    if (!this.addScript) {
+      this.addPaypalScript().then(() => {
+        
+        paypal.Buttons({
+          onInit: (data, actions) => {
+            
+            actions.enable();
+
+                this.paypalActions = actions;
+
+          },
+          onClick: (e) => {
+
+            this.paypalActions.enable();
+
+          },
+          createOrder: (data, actions) => {
+            return actions.order.create({
+              purchase_units: [{
+                  amount: { 
+                    value: "8", // amount !!!!!
+                    currency: 'EUR',
+                    breakdown: {
+                      item_total: {
+                        currency_code: 'EUR',
+                        value: "8" // amount !!!!!!
+                      }
+                    }
+                  },
+                  description: this.session.original_title,
+                  items: [
+                    {
+                      name: this.session.start_date + " --> " + this.session.end_date,
+                      quantity : 1,
+                      unit_amount: {
+                        currency_code : "EUR",
+                        value: "8" // amount !!!!!
+                      }
+                    }
+                  ]
+              }]
+            });
+          },
+          onApprove: (data, actions) => {
+
+            return actions.order.capture().then((details) => {
+              //Do something when payment is successful.
+      
+              //console.log(details);  details.id
+              //---------------------
+              
+              this.createTicket();
+
+            })
+          },
+          style: {
+            layout: 'horizontal',
+            size: 'responsive',
+            color: 'blue',
+            shape: 'rect',
+            label: 'checkout',
+            tagline: 'false'
+           }
+        }).render('#paypal-button-container');
+
+        this.paypalLoad = false;
+      })
+    }
   }
 
 

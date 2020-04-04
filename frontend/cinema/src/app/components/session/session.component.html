@@ -38,7 +38,9 @@
                             </form>
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-primary" (click)="createTicket()">Create</button>
+                            <div class="continuer pay" *ngIf="paypalLoad">Paypal button is loading</div>
+                            <div id="paypal-button-container" fxLayout="column" fxLayoutAlign="center stretch"></div>
+                            <!-- <button type="button" class="btn btn-outline-primary" (click)="createTicket()">Create</button> -->
                           </div>
                       </ng-template>
                     </ng-container>
