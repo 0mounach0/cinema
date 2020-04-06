@@ -1,7 +1,7 @@
-package com.mounach.cinema.security;
+package com.mounach.proxy.security;
 
-import com.mounach.cinema.repository.UserRepository;
-import com.mounach.cinema.service.CustomUserDetailsService;
+import com.mounach.proxy.repository.UserRepository;
+import com.mounach.proxy.service.CustomUserDetailsService;
 import com.sun.javafx.collections.ImmutableObservableList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -30,7 +30,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
 
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Configuration
@@ -58,33 +57,31 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET,"/api/user")
+                .antMatchers(HttpMethod.GET,"/cinema-service/cinema")
                 .permitAll()
-                .antMatchers(HttpMethod.GET,"/api/cinema")
+                .antMatchers(HttpMethod.GET,"/cinema-service/cinema/{id}")
                 .permitAll()
-                .antMatchers(HttpMethod.GET,"/api/cinema/{id}")
+                .antMatchers(HttpMethod.GET,"/cinema-service/city")
                 .permitAll()
-                .antMatchers(HttpMethod.GET,"/api/city")
+                .antMatchers(HttpMethod.GET,"/cinema-service/city/{id}")
                 .permitAll()
-                .antMatchers(HttpMethod.GET,"/api/city/{id}")
+                .antMatchers(HttpMethod.GET,"/cinema-service/cinema/{id}/theaters")
                 .permitAll()
-                .antMatchers(HttpMethod.GET,"/api/cinema/{id}/theaters")
+                .antMatchers(HttpMethod.GET,"/cinema-service/cinema/{id}/sessions")
                 .permitAll()
-                .antMatchers(HttpMethod.GET,"/api/cinema/{id}/sessions")
+                .antMatchers(HttpMethod.GET,"/cinema-service/session/{id}")
                 .permitAll()
-                .antMatchers(HttpMethod.GET,"/api/session/{id}")
+                .antMatchers(HttpMethod.GET,"/cinema-service/session/{id}/tickets")
                 .permitAll()
-                .antMatchers(HttpMethod.GET,"/api/session/{id}/tickets")
+                .antMatchers(HttpMethod.POST,"/cinema-service/ticket")
                 .permitAll()
-                .antMatchers(HttpMethod.POST,"/api/ticket")
-                .permitAll()
-                .antMatchers(HttpMethod.POST,"/api/qrcode")
+                .antMatchers(HttpMethod.POST,"/qrcode-service/qrcode")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
-                .loginProcessingUrl("/api/login")
+                .loginProcessingUrl("/login")
                 .successHandler(successHandler())
                 .failureHandler(failureHandler())
                 .and()
@@ -93,7 +90,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(authenticationEntryPoint())
                 .and()
                 .logout()
-                .logoutUrl("/api/logout")
+                .logoutUrl("/logout")
                 .deleteCookies("JSESSIONID");
     }
 

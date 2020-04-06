@@ -24,8 +24,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 
-//@CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("api/cinema")
+@RequestMapping("cinema")
 @RestController
 public class CinemaController {
 

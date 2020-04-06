@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-@RequestMapping("api/session")
+@RequestMapping("session")
 @RestController
 public class SessionController {
 

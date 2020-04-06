@@ -1,6 +1,6 @@
-package com.mounach.cinema.repository;
+package com.mounach.proxy.repository;
 
-import com.mounach.cinema.model.User;
+import com.mounach.proxy.model.User;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-@RequestMapping("api/theater")
+@RequestMapping("theater")
 @RestController
 public class TheaterController {
 

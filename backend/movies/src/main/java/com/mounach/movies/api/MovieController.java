@@ -6,9 +6,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/movie")
+@RequestMapping("/movie")
 public class MovieController {
 
     @Value("${api.key}")

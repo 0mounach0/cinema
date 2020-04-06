@@ -1,24 +1,22 @@
-package com.mounach.cinema.api;
+package com.mounach.qrcode.api;
 
-
-import com.mounach.cinema.generatorQR.ZxingBarcodeGenerator;
-
-
-import com.mounach.cinema.model.Ticket;
+import com.mounach.qrcode.generator.ZxingBarcodeGenerator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.awt.image.BufferedImage;
 
-
 @RestController
-@RequestMapping("api/qrcode")
+@RequestMapping("qrcode")
 public class BarcodeController {
 
     @PostMapping(produces = MediaType.IMAGE_PNG_VALUE)
-    public ResponseEntity<BufferedImage> zxingQRCode(@RequestBody Ticket ticket) throws Exception {
+    public ResponseEntity<BufferedImage> zxingQRCode(@RequestBody String ticket) throws Exception {
         return okResponse(ZxingBarcodeGenerator.generateQRCodeImage(ticket.toString()));
     }
 

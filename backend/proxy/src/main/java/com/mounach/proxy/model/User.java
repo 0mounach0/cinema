@@ -1,13 +1,10 @@
-package com.mounach.cinema.model;
+package com.mounach.proxy.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -109,3 +106,4 @@ public class User implements Serializable {
         this.active = active;
     }
 }
+

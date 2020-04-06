@@ -1,4 +1,4 @@
-package com.mounach.cinema.model;
+package com.mounach.proxy.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

@@ -1,4 +1,4 @@
-package com.mounach.cinema;
+package com.mounach.qrcode;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,14 +9,17 @@ import org.springframework.http.converter.HttpMessageConverter;
 
 import java.awt.image.BufferedImage;
 
-//@EnableWebSecurity
-//@EnableRedisHttpSession
 @EnableDiscoveryClient
 @SpringBootApplication
-public class CinemaApplication {
+public class QrcodeApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CinemaApplication.class, args);
+		SpringApplication.run(QrcodeApplication.class, args);
+	}
+
+	@Bean
+	public HttpMessageConverter<BufferedImage> createImageHttpMessageConverter() {
+		return new BufferedImageHttpMessageConverter();
 	}
 
 }

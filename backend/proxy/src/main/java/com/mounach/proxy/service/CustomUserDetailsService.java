@@ -1,9 +1,8 @@
-package com.mounach.cinema.service;
+package com.mounach.proxy.service;
 
-import com.mounach.cinema.model.City;
-import com.mounach.cinema.model.CustomUserDetails;
-import com.mounach.cinema.model.User;
-import com.mounach.cinema.repository.UserRepository;
+import com.mounach.proxy.model.CustomUserDetails;
+import com.mounach.proxy.model.User;
+import com.mounach.proxy.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,4 +1,4 @@
-package com.mounach.cinema.generatorQR;
+package com.mounach.qrcode.generator;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.client.j2se.MatrixToImageWriter;

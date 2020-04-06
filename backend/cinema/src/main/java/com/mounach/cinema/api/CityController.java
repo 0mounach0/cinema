@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-//@CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("api/city")
+@RequestMapping("city")
 @RestController
 public class CityController {
 
