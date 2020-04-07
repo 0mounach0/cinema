@@ -10,6 +10,7 @@ sourceCompatibility = '1.8'
 
 ext {
 	set('springCloudVersion', "Hoxton.SR3")
+	dekorateVersion = System.getProperty("dekorateVersion", "0.10.0")
 }
 
 repositories {
@@ -23,6 +24,13 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+
+	implementation 'org.springframework.cloud:spring-cloud-starter-kubernetes'
+
+	implementation("io.dekorate:dekorate-spring-boot:${dekorateVersion}")
+	implementation("io.dekorate:kubernetes-annotations:${dekorateVersion}")
+	annotationProcessor("io.dekorate:kubernetes-annotations:${dekorateVersion}")
+	annotationProcessor("io.dekorate:dekorate-spring-boot:${dekorateVersion}")
 
 	implementation 'com.google.zxing:core:3.3.0'
 	implementation 'com.google.zxing:javase:3.3.0'

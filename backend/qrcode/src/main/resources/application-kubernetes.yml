@@ -1,0 +1,14 @@
+server:
+  port: 8083
+eureka:
+  client:
+    enabled: false
+spring:
+  application:
+    name: qrcode-service
+  cloud:
+    kubernetes:
+      enabled: true
+dekorate:
+  kubernetes:
+    serviceType: "NodePort"

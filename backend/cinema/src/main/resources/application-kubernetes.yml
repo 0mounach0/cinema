@@ -1,0 +1,32 @@
+server:
+  port: 8081
+eureka:
+  client:
+    enabled: false
+spring:
+  application:
+    name: cinema-service
+  datasource:
+    url: jdbc:mysql://35.180.251.238:3306/cinemadb?useSSL=false&allowPublicKeyRetrieval=true
+    password: root
+    username: root
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: update
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 15MB
+  cloud:
+    kubernetes:
+      enabled: true
+dekorate:
+  kubernetes:
+    serviceType: "NodePort"

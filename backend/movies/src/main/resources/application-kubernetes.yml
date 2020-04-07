@@ -1,0 +1,16 @@
+server:
+  port: 8082
+eureka:
+  client:
+    enabled: false
+spring:
+  application:
+    name: movie-service
+  cloud:
+    kubernetes:
+      enabled: true
+api:
+  key: a6967dfebc336586896d857fe4984a8c
+dekorate:
+  kubernetes:
+    serviceType: "NodePort"

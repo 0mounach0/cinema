@@ -14,12 +14,21 @@ repositories {
 
 ext {
 	set('springCloudVersion', "Hoxton.SR3")
+	dekorateVersion = System.getProperty("dekorateVersion", "0.10.0")
 }
 
 dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-zuul'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+
+	implementation 'org.springframework.cloud:spring-cloud-kubernetes-discovery'
+
+	implementation 'org.springframework.cloud:spring-cloud-kubernetes-ribbon:1.1.1.RELEASE'
+
+	implementation 'org.springframework.cloud:spring-cloud-openfeign-core:2.2.2.RELEASE'
+
+	implementation 'org.springframework.cloud:spring-cloud-netflix-ribbon'
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -29,6 +38,11 @@ dependencies {
 	implementation 'org.springframework.session:spring-session-data-redis'
 
 	implementation 'io.lettuce:lettuce-core'
+
+	implementation("io.dekorate:dekorate-spring-boot:${dekorateVersion}")
+	implementation("io.dekorate:kubernetes-annotations:${dekorateVersion}")
+	annotationProcessor("io.dekorate:kubernetes-annotations:${dekorateVersion}")
+	annotationProcessor("io.dekorate:dekorate-spring-boot:${dekorateVersion}")
 
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'

@@ -17,6 +17,7 @@ configurations {
 
 ext {
 	set('springCloudVersion', "Hoxton.SR3")
+	dekorateVersion = System.getProperty("dekorateVersion", "0.10.0")
 }
 
 repositories {
@@ -30,10 +31,14 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
-	/*implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
-	implementation 'org.springframework.session:spring-session-data-redis'
+	implementation 'org.springframework.cloud:spring-cloud-kubernetes-discovery'
 
-	implementation 'org.springframework.boot:spring-boot-starter-security'*/
+	implementation 'org.springframework.cloud:spring-cloud-openfeign-core:2.2.2.RELEASE'
+
+	implementation("io.dekorate:dekorate-spring-boot:${dekorateVersion}")
+	implementation("io.dekorate:kubernetes-annotations:${dekorateVersion}")
+	annotationProcessor("io.dekorate:kubernetes-annotations:${dekorateVersion}")
+	annotationProcessor("io.dekorate:dekorate-spring-boot:${dekorateVersion}")
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
