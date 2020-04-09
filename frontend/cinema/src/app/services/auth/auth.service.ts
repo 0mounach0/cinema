@@ -9,7 +9,7 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) { }
 
-  private API_URL = environment.API_URL + '/api/';
+  private API_URL = environment.API_URL + '/';
 
   login (user) {
     const body = new HttpParams()

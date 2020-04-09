@@ -9,7 +9,7 @@ export class HomeService {
 
  
   /* -------- */
-  private API_URL = environment.API_URL + "/api/";
+  private API_URL = environment.API_URL + "/";
 
 
   /* ----- */

@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 export class CinemaService {
 
   /* -------- */
-  private API_URL = environment.API_URL + "/api/";
+  private API_URL = environment.API_URL + "/";
 
 
   /* ----- */
