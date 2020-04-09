@@ -2,13 +2,15 @@ server:
   port: 8082
 eureka:
   client:
-    enabled: false
+    enabled: true
 spring:
   application:
     name: movie-service
   cloud:
     kubernetes:
-      enabled: true
+      enabled: false
+    discovery:
+      all-namespaces: true
 api:
   key: a6967dfebc336586896d857fe4984a8c
 dekorate:

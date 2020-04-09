@@ -10,6 +10,7 @@ import com.mounach.cinema.repository.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
@@ -44,14 +45,15 @@ public class SessionService {
         session.setOriginal_title(s.getOriginal_title());
         session.setOverview(s.getOverview());
         session.setPoster_path(s.getPoster_path());
+        session.setPrice(s.getPrice());
         session.setRelease_date(s.getRelease_date());
         session.setStatus(s.getStatus());
         session.setTitle(s.getTitle());
         session.setVote_average(s.getVote_average());
         session.setTheater(s.getTheater());
         session.setMovie_id(s.getMovie_id());
-        session.setStart_date(s.getStart_date());
-        session.setEnd_date(s.getEnd_date());
+        session.setStartDate(s.getStartDate());
+        session.setEndDate(s.getEndDate());
         sessionRepository.save(session);
         return session;
     }
@@ -59,6 +61,12 @@ public class SessionService {
     public Iterable<Session> getCinemaSessions(UUID id) {
         Cinema cinema = cinemaRepository.findById(id).get();
         Iterable<Session> sessions = sessionRepository.findByTheater_Cinema(cinema);
+        return sessions;
+    }
+
+    public Iterable<Session> getCinemaSessions_byDate(UUID id, LocalDateTime start_date, LocalDateTime end_date) {
+        Cinema cinema = cinemaRepository.findById(id).get();
+        Iterable<Session> sessions = sessionRepository.findByTheater_CinemaAndStartDateBetween(cinema, start_date, end_date);
         return sessions;
     }
 

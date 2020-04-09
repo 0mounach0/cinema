@@ -8,6 +8,7 @@ import com.mounach.cinema.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @RequestMapping("cinema")
@@ -69,8 +71,13 @@ public class CinemaController {
     }
 
     @GetMapping("{id}/sessions")
-    private @ResponseBody Iterable<Session> getCinemaSessions(@PathVariable("id") UUID id) {
-        return sessionService.getCinemaSessions(id);
+    private @ResponseBody Iterable<Session> getCinemaSessions(@PathVariable("id") UUID id,
+                                                              @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") LocalDateTime start_date,
+                                                              @RequestParam(required = false) @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") LocalDateTime end_date) {
+        if(start_date==null || end_date==null)
+            return sessionService.getCinemaSessions(id);
+        else
+            return sessionService.getCinemaSessions_byDate(id, start_date, end_date);
     }
 
     @PostMapping("/upload")

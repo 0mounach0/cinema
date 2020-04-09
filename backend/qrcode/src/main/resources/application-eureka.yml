@@ -2,13 +2,15 @@ server:
   port: 8083
 eureka:
   client:
-    enabled: false
+    enabled: true
 spring:
   application:
     name: qrcode-service
   cloud:
     kubernetes:
-      enabled: true
+      enabled: false
+    discovery:
+      all-namespaces: true
 dekorate:
   kubernetes:
     serviceType: "NodePort"

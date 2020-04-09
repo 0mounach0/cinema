@@ -94,13 +94,4 @@ public class Theater implements Serializable {
         this.sessions = sessions;
     }
 
-    @Override
-    public String toString() {
-        return "Theater{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", num_places=" + num_places +
-                ", cinema=" + cinema +
-                '}';
-    }
 }

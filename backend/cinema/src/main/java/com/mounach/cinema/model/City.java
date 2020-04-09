@@ -60,11 +60,4 @@ public class City implements Serializable {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "City{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }

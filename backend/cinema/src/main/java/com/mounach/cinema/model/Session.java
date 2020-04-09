@@ -58,13 +58,17 @@ public class Session implements Serializable {
 
     @Column
     @NotNull
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime start_date;
+    private Double price;
 
     @Column
     @NotNull
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime end_date;
+    private LocalDateTime startDate;
+
+    @Column
+    @NotNull
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime endDate;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "theater_id", nullable = false)
@@ -80,13 +84,14 @@ public class Session implements Serializable {
             @JsonProperty("original_title") String original_title,
             @JsonProperty("overview") String overview,
             @JsonProperty("poster_path") String poster_path,
+            @JsonProperty("price") Double price,
             @JsonProperty("release_date") String release_date,
             @JsonProperty("status") String status,
             @JsonProperty("title") String title,
             @JsonProperty("vote_average") String vote_average,
             @JsonProperty("movie_id") int movie_id,
-            @JsonProperty("start_date") LocalDateTime start_date,
-            @JsonProperty("end_date") LocalDateTime end_date,
+            @JsonProperty("startDate") LocalDateTime startDate,
+            @JsonProperty("endDate") LocalDateTime endDate,
             @JsonProperty("theater") Theater theater) {
         this.original_title = original_title;
         this.overview = overview;
@@ -96,9 +101,10 @@ public class Session implements Serializable {
         this.title = title;
         this.vote_average = vote_average;
         this.movie_id = movie_id;
-        this.start_date = start_date;
-        this.end_date = end_date;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.theater = theater;
+        this.price = price;
     }
 
     public Session() {
@@ -106,6 +112,14 @@ public class Session implements Serializable {
 
     public UUID getId() {
         return id;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public int getMovie_id() {
@@ -124,20 +138,20 @@ public class Session implements Serializable {
         this.theater = theater;
     }
 
-    public LocalDateTime getStart_date() {
-        return start_date;
+    public LocalDateTime getStartDate() {
+        return startDate;
     }
 
-    public void setStart_date(LocalDateTime start_date) {
-        this.start_date = start_date;
+    public void setStartDate(LocalDateTime startDate) {
+        this.startDate = startDate;
     }
 
-    public LocalDateTime getEnd_date() {
-        return end_date;
+    public LocalDateTime getEndDate() {
+        return endDate;
     }
 
-    public void setEnd_date(LocalDateTime end_date) {
-        this.end_date = end_date;
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
     }
 
     public String getOriginal_title() {
@@ -204,21 +218,4 @@ public class Session implements Serializable {
         this.tickets = tickets;
     }
 
-    @Override
-    public String toString() {
-        return "Session{" +
-                "id=" + id +
-                ", movie_id=" + movie_id +
-                ", original_title='" + original_title + '\'' +
-                ", overview='" + overview + '\'' +
-                ", poster_path='" + poster_path + '\'' +
-                ", release_date='" + release_date + '\'' +
-                ", status='" + status + '\'' +
-                ", title='" + title + '\'' +
-                ", vote_average='" + vote_average + '\'' +
-                ", start_date=" + start_date +
-                ", end_date=" + end_date +
-                ", theater=" + theater +
-                '}';
-    }
 }

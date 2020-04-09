@@ -78,13 +78,4 @@ public class Ticket implements Serializable {
         this.session = session;
     }
 
-    @Override
-    public String toString() {
-        return "Ticket{" +
-                "id=" + id +
-                ", seat_num=" + seat_num +
-                ", fullname='" + fullname + '\'' +
-                ", session=" + session +
-                '}';
-    }
 }

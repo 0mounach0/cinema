@@ -2,13 +2,13 @@ server:
   port: 8081
 eureka:
   client:
-    enabled: false
+    enabled: true
 spring:
   application:
     name: cinema-service
   datasource:
-    url: jdbc:mysql://35.180.251.238:3306/cinemadb?useSSL=false&allowPublicKeyRetrieval=true
-    password: root
+    url: jdbc:mysql://15.188.232.94:3306/cinemadb?useSSL=false&allowPublicKeyRetrieval=true
+    password: olz3r_M00N
     username: root
   jpa:
     properties:
@@ -26,7 +26,9 @@ spring:
       max-request-size: 15MB
   cloud:
     kubernetes:
-      enabled: true
+      enabled: false
+      discovery:
+        all-namespaces: true
 dekorate:
   kubernetes:
     serviceType: "NodePort"

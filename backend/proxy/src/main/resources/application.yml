@@ -1,8 +1,5 @@
 server:
   port: 8080
-eureka:
-  client:
-    enabled: true
 ribbon:
   ReadTimeout: 60000
   SocketTimeout: 60000
@@ -11,8 +8,8 @@ spring:
   application:
     name: proxy-service
   datasource:
-    url: jdbc:mysql://35.180.251.238:3306/auth_cinema?useSSL=false&allowPublicKeyRetrieval=true
-    password: root
+    url: jdbc:mysql://15.188.232.94:3306/auth_cinema?useSSL=false&allowPublicKeyRetrieval=true
+    password: olz3r_M00N
     username: root
   jpa:
     properties:
@@ -26,14 +23,16 @@ spring:
   session:
     store-type: redis
   redis:
-    host: 35.180.251.238
+    host: 15.188.232.94
     database: 0
-    password: root
+    password: olz3r_M00N
     timeout: 10000
     port: 6379
   cloud:
     kubernetes:
-      enabled: false
+      enabled: true
+      discovery:
+        all-namespaces: true
 dekorate:
   kubernetes:
     serviceType: "NodePort"
