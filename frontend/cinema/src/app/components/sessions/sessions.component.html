@@ -1,5 +1,14 @@
-<div fxLayout="row wrap" fxLayoutAlign="space-around stretch" fxLayoutGap="15px">
-    <i class="far fa-plus-square plus_city" (click)="openCreateModal(content1)"></i>
+<nav class="navbar navbar-light bg-light t-nav">
+  <div>
+    <span><b>SESSIONS SETTINGS (
+      <span class="badge badge-success">ADD</span> / 
+      <span class="badge badge-danger">DELETE</span>)</b>
+    </span>
+  </div>
+  <div class="right-side d-flex">
+      <ul class="navbar-nav">
+
+        <i class="far fa-plus-square plus_city" (click)="openCreateModal(content1)"></i>
                 <ng-template #content1 let-c="close" let-d="dismiss">
                   <div class="modal-header">
                     <h4 class="modal-title" id="modal-basic-title">Create new Session</h4>
@@ -16,7 +25,7 @@
                               Movie
                             </mat-panel-title>
                             <mat-panel-description>
-                              <span *ngIf="session.original_title">{{session.original_title}}</span>
+                              <span *ngIf="session.original_title"><b>{{session.original_title}}</b></span>
                               <span *ngIf="!session.original_title">Choose a movie</span>
                             </mat-panel-description>
                           </mat-expansion-panel-header>
@@ -36,20 +45,30 @@
                         </select>
                       </div>
 
-                      <div class="form-group">
-                        <label for="start_date">Start date</label>
+                      <div class="form-group" fxLayout="row" fxLayoutAlign="start stretch">
+                        <label fxFlex="15" for="start_date"><b>Start date</b></label>
                         <input [owlDateTime]="dt1" id="start_date" name="start_date" 
-                        [(ngModel)]="session.start_date" placeholder="Date Time">
-                        <span [owlDateTimeTrigger]="dt1"><i class="fa fa-calendar"></i></span>
+                        [(ngModel)]="session.startDate" placeholder="Start date" readonly>
+                        <span [owlDateTimeTrigger]="dt1" fxLayout="row" fxLayoutAlign="center center">
+                          <i class="fa fa-calendar"></i>
+                        </span>
                         <owl-date-time #dt1></owl-date-time>
                       </div>
 
-                      <div class="form-group">
-                        <label for="end_date">End date</label>
+                      <div class="form-group" fxLayout="row" fxLayoutAlign="start stretch">
+                        <label fxFlex="15" for="end_date"><b>End date</b></label>
                         <input [owlDateTime]="dt2" id="end_date" name="end_date" 
-                        [(ngModel)]="session.end_date"  placeholder="Date Time">
-                        <span [owlDateTimeTrigger]="dt2"><i class="fa fa-calendar"></i></span>
+                        [(ngModel)]="session.endDate"  placeholder="End date" readonly>
+                        <span [owlDateTimeTrigger]="dt2" fxLayout="row" fxLayoutAlign="center center">
+                          <i class="fa fa-calendar"></i>
+                        </span>
                         <owl-date-time #dt2></owl-date-time>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="desc">Price</label>
+                        <input type="number" class="form-control" [(ngModel)]="session.price" name="price"
+                          id="price" min="0.99" max="50">
                       </div>
                       
                     </form>
@@ -59,6 +78,12 @@
                   </div>
               </ng-template>
 
+      </ul>
+  </div>
+</nav>
+
+<div fxLayout="row wrap" fxLayoutAlign="space-around stretch" fxLayoutGap="15px">
+    
     <ng-container *ngFor="let session of sessions">
 
         <div class="card bg-light theater">
@@ -66,8 +91,8 @@
                      class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title"><a [routerLink]="'/session/' + session.id">{{session.title}}</a></h5>
-              <p class="card-text">from : <span class="badge badge-info">{{session.start_date}}</span></p>
-              <p class="card-text">to   : <span class="badge badge-info">{{session.end_date}}</span></p>
+              <p class="card-text">from : <span class="badge badge-info">{{session.startDate}}</span></p>
+              <p class="card-text">to   : <span class="badge badge-info">{{session.endDate}}</span></p>
               <div fxLayout="row" fxLayoutAlign="end stretch" >
                 <i class="fas fa-trash-alt delete" (click)="openDeleteModal(content)"></i>
                 <ng-template #content let-c="close" let-d="dismiss">

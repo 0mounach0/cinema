@@ -41,3 +41,12 @@
     color: rgb(62, 68, 62);
     cursor: pointer;
 }
+
+.card-img {
+    width: 150px;
+}
+
+:host ::ng-deep .mat-tab-body-wrapper {
+    height: 100%;
+    min-height: 60vh;
+}

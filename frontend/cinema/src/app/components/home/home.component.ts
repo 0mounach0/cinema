@@ -45,10 +45,14 @@ export class HomeComponent implements OnInit {
 
       L.marker([+c.latitude, +c.longitude], {icon: myIcon})
        .bindPopup(
-         '<h5>' +
+         '<a style="color: rgb(71, 71, 71);cursor: pointer;font-size: 2em;text-decoration: none;" href="'
+         +location.origin+'/cinema/'+c.id+'" target="_blank">' +
           c.name.toString()
-        +'<h5>'+
-        '<a href="'+location.origin+'/cinema/'+c.id+'" target="_blank" >Link Opens in New Tab</a>'
+        +'<a></br>'+
+        '<a style="cursor: pointer;" href="'
+        +location.origin+'/cinema/'+c.id+'" target="_blank">'+
+        '<img style="display: block;margin-left: auto;margin-right: auto;" src="../../../assets/cinema.png" width="150" alt="cinema">'
+        +'</a>'
        )
        .addTo(cinemaMap)
        .openPopup();  

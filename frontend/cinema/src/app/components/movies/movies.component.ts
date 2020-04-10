@@ -12,6 +12,7 @@ export class MoviesComponent implements OnInit {
 
   movies: Array<Movie> = new Array();
   query: String;
+  selected: string;
 
   @Output() onMoviePicked: EventEmitter<any> = new EventEmitter<any>();
 
@@ -25,6 +26,7 @@ export class MoviesComponent implements OnInit {
 
   //-------------------
   pickMovie(movie) {
+    this.selected = movie.id;
     this.onMoviePicked.emit(movie);
   }
 

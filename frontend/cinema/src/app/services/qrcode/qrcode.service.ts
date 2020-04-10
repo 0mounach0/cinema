@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class QrcodeService {
 
   /* -------- */
-  private API_URL = environment.API_URL + "/api/";
+  private API_URL = environment.API_URL + "/qrcode-service/";
 
 
   /* ----- */

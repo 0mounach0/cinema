@@ -18,6 +18,7 @@ export class TheatersComponent implements OnInit {
   cinema_id: any;
   cinema: Cinema = new Cinema();
   theater: Theater = new Theater();
+  theaterUpdate: Theater = new Theater();
 
   constructor(
     private router: Router,
@@ -147,13 +148,13 @@ export class TheatersComponent implements OnInit {
   //---------------------------------
   openUpdateModal(content, t) {
     this.modalService.open(content, { size: 'lg', scrollable: true });
-    this.theater = t;
+    this.theaterUpdate = t;
   }
 
   /* ----------------------- */
   updateTheaterService() {
     let promise = new Promise((resolve, reject) => {
-      this.theaterService.updateTheater(this.theater)
+      this.theaterService.updateTheater(this.theaterUpdate)
      .subscribe((response: any) => {
        console.log(response);
        resolve(response);

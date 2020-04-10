@@ -13,7 +13,8 @@
 
         <ng-container *ngFor="let movie of movies">
 
-            <div class="card card_movie" (click)="pickMovie(movie)">
+            <div class="card card_movie" (click)="pickMovie(movie)" 
+                [ngClass]="{'selected': selected == movie.id }">
                 <img [src]="'https://image.tmdb.org/t/p/w500'+movie.poster_path" 
                      class="card-img-top" alt="...">
                 <div class="card-body">

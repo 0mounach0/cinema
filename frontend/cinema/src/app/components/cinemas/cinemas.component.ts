@@ -134,6 +134,8 @@ export class CinemasComponent implements OnInit {
       this.createCinemaService().then((res: any) => {
         this.modalService.dismissAll();
         this.getAllCinemas();
+        this.cinema = new Cinema();
+        this.newCity = new City();
       });
     } else {
       this.createCityService().then((res: any) => {
@@ -141,6 +143,8 @@ export class CinemasComponent implements OnInit {
         this.createCinemaService().then((res: any) => {
           this.modalService.dismissAll();
           this.getAllCinemas();
+          this.cinema = new Cinema();
+          this.newCity = new City();
         });
       });
     }

@@ -3,10 +3,10 @@
 
     <div class="card card-cine">
         <div fxLayout="row" fxLayoutAlign="start stretch" >
-            <div fxFlex="20">
-                <img src="https://media.timeout.com/images/101210573/660/370/image.jpg" class="card-img" alt="...">
+              <div>
+                <img src="../../../assets/cinema.png" class="card-img" alt="...">
               </div>
-              <div fxFlex="70">
+              <div >
                 <div class="card-body">
                   <h5 class="card-title">{{cinema.name}}</h5>
                   <p class="card-text">{{cinema.description}}</p>
@@ -19,17 +19,20 @@
           </div>
       </div>
 
+      <div class="container_t_s" id="wrapper">
+        <mat-tab-group mat-align-tabs="center" id="tab-group">
 
-      <mat-tab-group mat-align-tabs="center">
-
-        <mat-tab label="Theaters">
-          <app-theaters></app-theaters>
-        </mat-tab>
+          <mat-tab label="Theaters" class="sec-mat">
+            <app-theaters></app-theaters>
+          </mat-tab>
+          
+          <mat-tab label="Sessions">
+            <app-sessions></app-sessions>
+          </mat-tab>
         
-        <mat-tab label="Sessions">
-          <app-sessions></app-sessions>
-        </mat-tab>
+        </mat-tab-group>
+      </div>
+
       
-      </mat-tab-group>
 
 </div>

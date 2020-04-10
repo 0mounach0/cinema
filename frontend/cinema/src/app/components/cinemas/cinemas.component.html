@@ -1,13 +1,17 @@
 <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
 
     <nav class="navbar navbar-light bg-light">
-        <div></div>
+        <div>
+          <span><b>CINEMAS SETTINGS (
+            <span class="badge badge-success">ADD</span> / 
+            <span class="badge badge-warning">EDIT</span> / 
+            <span class="badge badge-danger">DELETE</span>)</b>
+          </span>
+        </div>
         <div class="right-side d-flex">
             <ul class="navbar-nav">
                 
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <i class="fas fa-search search"></i>
                     <i class="fas fa-plus-square plus" (click)="openCreateModal(content1)"></i>
                     <ng-template #content1 let-c="close" let-d="dismiss">
                         <div class="modal-header">
@@ -61,20 +65,18 @@
         </div>
     </nav>
 
-    <div fxLayout="row wrap" fxLayoutAlign="space-around stretch" fxLayoutGap="15px">
+    <div fxLayout="row wrap" fxLayoutAlign="space-around stretch" fxLayoutGap="15px" class="cinemas_list">
 
         <ng-container *ngFor="let cinema of cinemas">
     
             <mat-card class="card">
-                <mat-card-header>
-                  <mat-card-title ><a [routerLink]="'/cinema/' + cinema.id">{{cinema.name}}</a></mat-card-title>
+                <mat-card-header [routerLink]="'/cinema/' + cinema.id + '/settings'">
+                  <mat-card-title >{{cinema.name}}</mat-card-title>
                   <mat-card-subtitle>{{cinema.city.name}}</mat-card-subtitle>
                 </mat-card-header>
-                <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-                <mat-card-content>
-                  <p>
-                    {{cinema.description}}
-                  </p>
+                <mat-card-content fxLayout="column" fxLayoutAlign="start center" 
+                          [routerLink]="'/cinema/' + cinema.id + '/settings'">
+                  <img src="../../../assets/cinema.png" class="cine_img" alt="cinema">
                 </mat-card-content>
                 <mat-card-actions>
                     <div fxLayout="row" fxLayoutAlign="end stretch" >

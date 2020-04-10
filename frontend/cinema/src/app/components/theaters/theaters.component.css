@@ -1,9 +1,16 @@
-.card-cine {
-    width: 100%;
+.card {
+    width: 300px;
+    height: 310px;
+    margin-bottom: 15px;
 }
 
-.theater {
-    max-width: 300px;
+.t-nav {
+    margin-bottom: 15px;
+    margin-top: 8px;
+}
+
+.card:hover{
+    opacity: 0.8;
 }
 
 .delete, .edit {
@@ -13,18 +20,28 @@
 }
 
 .delete:hover {
-    color: rgb(66, 62, 62);
+    color: rgb(201, 35, 35);
     cursor: pointer;
 }
 
 .edit:hover {
-    color: rgb(66, 62, 62);
+    color: rgb(224, 151, 54);
     cursor: pointer;
 }
 
 .plus {
     font-size: 2.5em;
     color: rgb(90, 199, 81);
+}
+
+.search {
+    font-size: 2.5em;
+    color: rgb(91, 135, 194);
+}
+
+.search:hover {
+    color: rgb(46, 87, 141);
+    cursor: pointer;
 }
 
 .plus:hover {
@@ -40,4 +57,14 @@
 .plus_city:hover {
     color: rgb(62, 68, 62);
     cursor: pointer;
+}
+
+
+.cine_img {
+    width: 150px;
+}
+
+.num {
+    font-size: 1.2em;
+    margin-left: 5px;
 }

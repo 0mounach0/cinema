@@ -39,14 +39,15 @@ export class AuthService {
   }
 
   logout() {
-    return this.httpClient.get(this.API_URL + "logout",
-      {
-        headers:  new HttpHeaders()
-          .set('Content-Type', 'application/json')
-          .set('Accept', 'application/json'),
-        observe: 'response',
-        withCredentials: true
-      }
+    return this.httpClient.post(this.API_URL + "logout",
+    null,
+    {
+      headers:  new HttpHeaders()
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json'),
+      observe: 'response',
+      withCredentials: true
+    }
     );
   }
   

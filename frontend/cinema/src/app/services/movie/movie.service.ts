@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class MovieService {
 
   /* -------- */
-  private API_URL = environment.API_URL_MOVIE + "/api/";
+  private API_URL = environment.API_URL + "/movies-service/";
 
 
   /* ----- */
@@ -23,7 +23,8 @@ export class MovieService {
         headers:  new HttpHeaders()
           .set('Content-Type', 'application/json')
           .set('Accept', 'application/json'),
-        observe: 'response'
+        observe: 'response',
+        withCredentials: true
       }
     );
     

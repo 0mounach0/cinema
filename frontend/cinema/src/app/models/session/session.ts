@@ -8,9 +8,10 @@ export class Session {
     release_date?: String;
     status?: String;
     title?: String;
+    price?: Number;
     vote_average?: String;
     movie_id?: Number;
     theater?: Theater;
-    start_date?: string;
-    end_date?: string;
+    startDate?: string;
+    endDate?: string;
 }

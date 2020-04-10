@@ -132,11 +132,11 @@ export class SessionsComponent implements OnInit {
 
     this.getTheaterObjectById(this.selectedTheater);
 
-    let d1 = new Date(this.session.start_date);
-    this.session.start_date = this.formatDate(d1);
+    let d1 = new Date(this.session.startDate);
+    this.session.startDate = this.formatDate(d1);
 
-    let d2 = new Date(this.session.end_date);
-    this.session.end_date = this.formatDate(d2);
+    let d2 = new Date(this.session.endDate);
+    this.session.endDate = this.formatDate(d2);
 
     this.createSessionService().then((res: any) => {
       this.modalService.dismissAll();

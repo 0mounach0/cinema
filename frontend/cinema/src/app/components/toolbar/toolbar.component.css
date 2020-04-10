@@ -49,3 +49,12 @@
     .admin {
         margin-right: 10px;
     }
+
+    .logo_m:hover {
+        opacity: 0.5;
+    }
+
+    .setting_c {
+        margin-left: 3px;
+        font-size: 1.6em;
+    }

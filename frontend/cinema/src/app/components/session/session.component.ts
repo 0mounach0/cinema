@@ -206,23 +206,23 @@ export class SessionComponent implements OnInit {
             return actions.order.create({
               purchase_units: [{
                   amount: { 
-                    value: "8", // amount !!!!!
+                    value: this.session.price, // amount !!!!!
                     currency: 'EUR',
                     breakdown: {
                       item_total: {
                         currency_code: 'EUR',
-                        value: "8" // amount !!!!!!
+                        value: this.session.price // amount !!!!!!
                       }
                     }
                   },
                   description: this.session.original_title,
                   items: [
                     {
-                      name: this.session.start_date + " --> " + this.session.end_date,
+                      name: this.session.startDate + " --> " + this.session.endDate,
                       quantity : 1,
                       unit_amount: {
                         currency_code : "EUR",
-                        value: "8" // amount !!!!!
+                        value: this.session.price // amount !!!!!
                       }
                     }
                   ]
