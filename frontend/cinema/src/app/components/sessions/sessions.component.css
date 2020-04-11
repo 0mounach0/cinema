@@ -1,25 +1,22 @@
-.card-cine {
-    width: 100%;
+.card {
+    width: 600px;
+    height: 300px;
+    margin-bottom: 15px;
 }
 
-.theater {
-    max-width: 300px;
-}
-
-.delete, .edit {
+.delete, .date_cnl {
     font-size: 1.5em;
     color: rgb(92, 87, 87);
     margin: 5px;
 }
 
-.delete:hover {
-    color: rgb(66, 62, 62);
+.delete:hover, .date_cnl:hover  {
+    color: rgb(201, 35, 35);
     cursor: pointer;
 }
 
-.edit:hover {
-    color: rgb(66, 62, 62);
-    cursor: pointer;
+.plus_cont {
+    margin-left: 8px;
 }
 
 .plus {
@@ -69,4 +66,29 @@
 
 .fa-calendar:hover {
     opacity: 0.5;
+}
+
+.star {
+    position: relative;
+    display: inline-block;
+    font-size: 1rem;
+  }
+  
+  .half {
+    position: absolute;
+    display: inline-block;
+    overflow: hidden;
+  }
+  .text-warning {
+    color: #4f744a !important;
+  }
+
+  .t-nav {
+    margin-bottom: 15px;
+    margin-top: 8px;
+}
+
+.card-img-top:hover {
+    cursor: pointer;
+    opacity: 0.7;
 }

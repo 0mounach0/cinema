@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
 
           this.storage.set("app", this.app);
 
-          this.router.navigate(['/home']);
+          this.router.navigate(['/cinemas']);
         });
 
       }

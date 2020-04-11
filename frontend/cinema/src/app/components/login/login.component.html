@@ -1,4 +1,4 @@
-<div class="wrapper fadeInDown">
+<div class="wrapper fadeInDown" (keyup.enter)="f.form.valid && onSubmit()">
     <div id="formContent">
       <!-- Tabs Titles -->
   
@@ -14,10 +14,5 @@
         <input type="submit" (click)="loginButton" class="fadeIn fourth" value="Log In">
       </form>
   
-      <!-- Remind Passowrd -->
-      <!-- <div id="formFooter">
-        <a class="underlineHover" href="#">Forgot Password?</a>
-      </div> -->
-  
     </div>
-  </div>
+</div>

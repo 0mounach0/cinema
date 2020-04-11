@@ -25,6 +25,8 @@ export class SessionComponent implements OnInit {
   public imagePath;
   imgURL: any;
 
+  showPayBtn: boolean = false;
+
   addScript: boolean = false;
   paypalLoad: boolean = true;
   paypalActions: any;
@@ -107,7 +109,7 @@ export class SessionComponent implements OnInit {
 
     this.createTicketService().then((res: any) => {
       //this.modalService.dismissAll();
-      this.showQrcode(res.body);
+      this.showQrcode(res.body.id);
       this.getSessionTickets();
     });
     
@@ -133,6 +135,10 @@ export class SessionComponent implements OnInit {
 
   //--------------------------------
   openCreateModal(content, i) {
+    this.ticket = new Ticket();
+    this.imgURL = false;
+    this.showPayBtn = true;
+    this.addScript = false;
     this.afterModalOpen();
     this.ticket.seat_num = i;
     this.ticket.session = this.session;
@@ -169,6 +175,10 @@ export class SessionComponent implements OnInit {
 
     });
 
+  }
+
+  go_back() {
+    this.router.navigate(['/cinema/'+this.session.theater.cinema.id+'/sessions']);
   }
 
   //-----------------paypal----------------------
@@ -233,11 +243,9 @@ export class SessionComponent implements OnInit {
 
             return actions.order.capture().then((details) => {
               //Do something when payment is successful.
-      
-              //console.log(details);  details.id
-              //---------------------
-              
+     
               this.createTicket();
+              this.showPayBtn = false;
 
             })
           },
@@ -257,5 +265,9 @@ export class SessionComponent implements OnInit {
   }
 
 
+  //-----------
+  getStrChars_60 (str) {
+    return str.substr(0, 160);
+  }
 
 }

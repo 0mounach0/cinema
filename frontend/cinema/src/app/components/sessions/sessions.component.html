@@ -6,9 +6,26 @@
     </span>
   </div>
   <div class="right-side d-flex">
-      <ul class="navbar-nav">
-
-        <i class="far fa-plus-square plus_city" (click)="openCreateModal(content1)"></i>
+      <ul class="navbar-nav" fxLayout="row" fxLayoutAlign="start stretch">
+        <span *ngIf="show_date_cnl==true" class="date_cnl" (click)="selectAllCinemaSessions()" 
+              fxLayout="row" fxLayoutAlign="center center">
+          <i class="far fa-calendar-times"></i>
+        </span>
+        <form class="form-inline">
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd" (dateSelect)="datePicked()" readonly
+                     name="dp" [(ngModel)]="date_picked" ngbDatepicker #d="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                  <i class="far fa-calendar-alt"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="plus_cont" fxLayout="row" fxLayoutAlign="center center">
+          <i class="far fa-plus-square plus_city" (click)="openCreateModal(content1)"></i>
                 <ng-template #content1 let-c="close" let-d="dismiss">
                   <div class="modal-header">
                     <h4 class="modal-title" id="modal-basic-title">Create new Session</h4>
@@ -19,7 +36,7 @@
                   <div class="modal-body">
                     <form>
                       <div class="form-group">
-                        <mat-expansion-panel>
+                        <mat-expansion-panel [expanded]="expanded === true">
                           <mat-expansion-panel-header>
                             <mat-panel-title>
                               Movie
@@ -77,7 +94,7 @@
                     <button type="button" class="btn btn-outline-primary" (click)="createSession()">Create</button>
                   </div>
               </ng-template>
-
+            </div>
       </ul>
   </div>
 </nav>
@@ -86,54 +103,59 @@
     
     <ng-container *ngFor="let session of sessions">
 
-        <div class="card bg-light theater">
-          <img [src]="'https://image.tmdb.org/t/p/w500'+session.poster_path" 
-                     class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title"><a [routerLink]="'/session/' + session.id">{{session.title}}</a></h5>
-              <p class="card-text">from : <span class="badge badge-info">{{session.startDate}}</span></p>
-              <p class="card-text">to   : <span class="badge badge-info">{{session.endDate}}</span></p>
-              <div fxLayout="row" fxLayoutAlign="end stretch" >
-                <i class="fas fa-trash-alt delete" (click)="openDeleteModal(content)"></i>
-                <ng-template #content let-c="close" let-d="dismiss">
-                  <div class="modal-header">
-                    <h4 class="modal-title" id="modal-basic-title">Are you sure you want to delete it !</h4>
-                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger" (click)="deleteSession(session.id)">Confirm delete</button>
-                  </div>
-                </ng-template>
-                <i class="fas fa-edit edit" (click)="openUpdateModal(content2, theater)"></i>
-                <ng-template #content2 let-c="close" let-d="dismiss">
-                  <div class="modal-header">
-                    <h4 class="modal-title" id="modal-basic-title">Update Session</h4>
-                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <form>
-                      <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" [(ngModel)]="session.name" name="name"
-                          id="name" placeholder="Name">
-                      </div>
-                      <div class="form-group">
-                        <label for="desc">movie_id</label>
-                        <input type="number" class="form-control" [(ngModel)]="session.movie_id" name="movie_id"
-                        id="movie_id">
-                      </div>
-                    </form>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-primary" (click)="updateSession()">Update</button>
-                  </div>
-              </ng-template>
+        <div class="card mb-3">
+          <div class="row no-gutters">
+            <div class="col-4">
+              <img [src]="'https://image.tmdb.org/t/p/w500'+session.poster_path" 
+                     class="card-img-top" alt="..." (click)="gotoSession(session.id)">
+            </div>
+            <div class="col-8">
+              <div class="card-body">
+                <h5 class="card-title">{{session.title}}</h5>
+                <p class="card-text" fxLayout="row" fxLayoutAlign="start stretch">
+                  <span fxFlex="30">FROM</span>
+                  <span class="badge badge-info" fxLayout="row" fxLayoutAlign="start center">{{session.startDate}}</span>
+                </p>
+                <p class="card-text" fxLayout="row" fxLayoutAlign="start stretch">
+                  <span fxFlex="30">TO</span>
+                  <span class="badge badge-info" fxLayout="row" fxLayoutAlign="start center">{{session.endDate}}</span>
+                </p>
+                <p class="card-text" fxLayout="row" fxLayoutAlign="start stretch">
+                  <span fxFlex="30">PRICE</span>
+                  <span class="badge badge-success" fxLayout="row" fxLayoutAlign="start center">{{session.price}} EUR</span>
+                </p>
+                <p class="card-text" fxLayout="row" fxLayoutAlign="start stretch">
+                  <span fxFlex="30">THEATER</span>
+                  <span class="badge badge-success" fxLayout="row" fxLayoutAlign="start center">{{session.theater.name}} EUR</span>
+                </p>
+                <p class="card-text" fxLayout="row" fxLayoutAlign="start stretch">
+                  <span fxFlex="30">RATING</span>
+                  <span fxLayout="row" fxLayoutAlign="start center">
+                    <ng-template #t let-fill="fill">
+                      <span class="star" [class.full]="fill === 100">
+                        <span class="half" [style.width.%]="fill"><em class="fa fa-star text-warning"></em></span><em class="fa fa-star-o text-warning cursor"></em>
+                      </span>
+                    </ng-template>
+                    <ngb-rating [(rate)]="session.vote_average" [starTemplate]="t" [readonly]="true" max="10"></ngb-rating>
+                  </span>
+                </p>
+                <div fxLayout="row" fxLayoutAlign="end stretch" >
+                  <i class="fas fa-trash-alt delete" (click)="openDeleteModal(content)"></i>
+                  <ng-template #content let-c="close" let-d="dismiss">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="modal-basic-title">Are you sure you want to delete it !</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-danger" (click)="deleteSession(session.id)">Confirm delete</button>
+                    </div>
+                  </ng-template>
+                </div>
               </div>
             </div>
+          </div>
         </div>
 
     </ng-container>

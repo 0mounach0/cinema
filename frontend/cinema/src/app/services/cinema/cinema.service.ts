@@ -61,6 +61,22 @@ export class CinemaService {
   }
 
   /* ------------- */
+  getCinemaSessionByDate(id, start_date, end_date) {
+    
+    return this.httpClient.get(this.API_URL + "cinema/" + id + "/sessions?start_date="+start_date
+                                            +"&end_date="+end_date,
+      {
+        headers:  new HttpHeaders()
+          .set('Content-Type', 'application/json')
+          .set('Accept', 'application/json'),
+        observe: 'response',
+        withCredentials: true
+      }
+    );
+    
+  }
+
+  /* ------------- */
   getOneCinema(id) {
     
     return this.httpClient.get(this.API_URL + "cinema/" + id ,

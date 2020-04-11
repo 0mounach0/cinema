@@ -1,0 +1,103 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" >
+
+
+    <div class="card card-cine">
+        <div fxLayout="row" fxLayoutAlign="start stretch" >
+              <div>
+                <img src="../../../assets/cinema.png" class="card-img" alt="...">
+              </div>
+              <div >
+                <div class="card-body">
+                  <h5 class="card-title">{{cinema.name}}</h5>
+                  <p class="card-text">{{cinema.description}}</p>
+                  <p class="card-text"><small class="text-muted">{{cinema.address}}</small></p>
+                </div>
+              </div>
+              <div fxFlex="10"  fxLayout="column" fxLayoutAlign="center center">
+                
+              </div>
+          </div>
+      </div>
+
+      <div id="wrapper">
+
+        <nav class="navbar navbar-light bg-light t-nav">
+            <div>
+              <span><b>SESSIONS LIST (
+                <span class="badge badge-info">SEARCH BY DATE</span> 
+                )</b>
+              </span>
+            </div>
+            <div class="right-side d-flex">
+                <ul class="navbar-nav" fxLayout="row" fxLayoutAlign="start stretch">
+                  <form class="form-inline">
+                    <div class="form-group">
+                      <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" (dateSelect)="datePicked()" readonly
+                               name="dp" [(ngModel)]="date_picked" ngbDatepicker #d="ngbDatepicker">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                            <i class="far fa-calendar-alt"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </ul>
+            </div>
+          </nav>
+
+          <div fxLayout="row wrap" fxLayoutAlign="space-around stretch" fxLayoutGap="15px">
+    
+            <ng-container *ngFor="let session of sessions">
+        
+                <div class="card mb-3 card-session" (click)="gotoSession(session.id)">
+                  <div class="row no-gutters">
+                    <div class="col-4">
+                      <img [src]="'https://image.tmdb.org/t/p/w500'+session.poster_path" 
+                             class="card-img-top" alt="..." >
+                    </div>
+                    <div class="col-8">
+                      <div class="card-body">
+                        <h5 class="card-title">{{session.title}}</h5>
+                        <p class="card-text" fxLayout="row" fxLayoutAlign="start stretch">
+                          <span fxFlex="30">FROM</span>
+                          <span class="badge badge-info" fxLayout="row" fxLayoutAlign="start center">{{session.startDate}}</span>
+                        </p>
+                        <p class="card-text" fxLayout="row" fxLayoutAlign="start stretch">
+                          <span fxFlex="30">TO</span>
+                          <span class="badge badge-info" fxLayout="row" fxLayoutAlign="start center">{{session.endDate}}</span>
+                        </p>
+                        <p class="card-text" fxLayout="row" fxLayoutAlign="start stretch">
+                          <span fxFlex="30">PRICE</span>
+                          <span class="badge badge-success" fxLayout="row" fxLayoutAlign="start center">{{session.price}} EUR</span>
+                        </p>
+                        <p class="card-text" fxLayout="row" fxLayoutAlign="start stretch">
+                          <span fxFlex="30">THEATER</span>
+                          <span class="badge badge-success" fxLayout="row" fxLayoutAlign="start center">{{session.theater.name}} EUR</span>
+                        </p>
+                        <p class="card-text" fxLayout="row" fxLayoutAlign="start stretch">
+                          <span fxFlex="30">RATING</span>
+                          <span fxLayout="row" fxLayoutAlign="start center">
+                            <ng-template #t let-fill="fill">
+                              <span class="star" [class.full]="fill === 100">
+                                <span class="half" [style.width.%]="fill"><em class="fa fa-star text-warning"></em></span><em class="fa fa-star-o text-warning cursor"></em>
+                              </span>
+                            </ng-template>
+                            <ngb-rating [(rate)]="session.vote_average" [starTemplate]="t" [readonly]="true" max="10"></ngb-rating>
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        
+            </ng-container>
+        
+          </div>
+        
+      </div>
+
+      
+
+</div>

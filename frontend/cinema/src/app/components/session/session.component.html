@@ -1,54 +1,138 @@
 <div fxLayout="column" fxLayoutAlign="start stretch" >
 
-    <div class="card card-cine">
+      <div class="card card-cine">
         <div fxLayout="row" fxLayoutAlign="start stretch" >
-            <div fxFlex="30">
-                <img [src]="'https://image.tmdb.org/t/p/w500'+session.poster_path" class="card-img" alt="...">
+              <div>
+                <img src="../../../assets/cinema.png" class="card-img" alt="...">
               </div>
-              <div fxFlex="40">
-                <div class="card-body">
-                  <h5 class="card-title">{{session.title}}</h5>
-                  <p class="card-text">{{session.overview}}</p>
-                  <p class="card-text"><small class="text-muted">{{session.startDate}}</small></p>
+              <div >
+                <div class="card-body" *ngIf="session.theater">
+                  <h5 class="card-title">{{session.theater.cinema.name}}</h5>
+                  <p class="card-text">{{session.theater.cinema.description}}</p>
+                  <p class="card-text"><small class="text-muted">{{session.theater.cinema.address}}</small></p>
                 </div>
               </div>
-              <div fxFlex="30" fxLayout="row wrap" fxLayoutAlign="center center">
-                    <ng-container *ngFor='let in of counter(session.theater?.num_places) ;let i = index'>
-                        <span fxFlex="10" *ngIf="checkTickets(i+1)"><i class="fas fa-couch disable"></i></span>
-                        <span fxFlex="10" *ngIf="!checkTickets(i+1)">
-                          <i class="fas fa-couch enable" (click)="openCreateModal(content1, i+1)"></i>
-                        </span>
-                        <ng-template #content1 let-c="close" let-d="dismiss">
-                          <div class="modal-header">
-                            <h4 class="modal-title" id="modal-basic-title">Create new Ticket</h4>
-                            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <form>
-                              <div class="form-group">
-                                <label for="name">Fullname</label>
-                                <input type="text" class="form-control" [(ngModel)]="ticket.fullname" name="name"
-                                  id="name" placeholder="Fullname">
-                              </div>
-                              <div>
-                                <img [src]="imgURL" *ngIf="imgURL">
-                              </div>
-                            </form>
-                          </div>
-                          <div class="modal-footer">
-                            <div class="continuer pay" *ngIf="paypalLoad">Paypal button is loading</div>
-                            <div id="paypal-button-container" fxLayout="column" fxLayoutAlign="center stretch"></div>
-                            <!-- <button type="button" class="btn btn-outline-primary" (click)="createTicket()">Create</button> -->
-                          </div>
-                      </ng-template>
-                    </ng-container>
-                    <span fxFlex="100" fxLayout="row" fxLayoutAlign="center center">
-                        <i class="fas fa-tv"></i>
-                    </span>
+              <div fxFlex="10"  fxLayout="column" fxLayoutAlign="center center">
+                
               </div>
           </div>
       </div>
+
+      <div id="wrapper">
+
+        <nav class="navbar navbar-light bg-light t-nav">
+            <div>
+              <span><b>SESSION DETAILS (
+                <span class="badge badge-info">CHOOSE YOUR SEAT</span> 
+                )</b>
+              </span>
+            </div>
+            <div class="right-side d-flex">
+              <ul class="navbar-nav" fxLayout="row" fxLayoutAlign="start stretch">
+                <span class="return" (click)="go_back()">
+                  <i class="fas fa-reply"></i>
+                  <span><b> CINEMA SESSIONS</b></span>
+                </span>
+              </ul>
+            </div>
+          </nav>
+
+          <div fxLayout="row wrap" fxLayoutAlign="space-around stretch" fxLayoutGap="15px">
+    
+              <div class="card mb-3 card-session">
+                <div class="row no-gutters">
+                  <div class="col-4">
+                    <img [src]="'https://image.tmdb.org/t/p/w500'+session.poster_path" 
+                           class="card-img-top" alt="..." >
+                  </div>
+                  <div class="col-8">
+                    <div class="card-body">
+                      <h5 class="card-title">{{session.title}}</h5>
+                      <p class="card-text" fxLayout="row" fxLayoutAlign="start stretch" *ngIf="session.overview">
+                        <span fxFlex="30">OVERVIEW</span>
+                        <small class="overview" fxLayout="row" fxLayoutAlign="start center">{{getStrChars_60(session.overview)}}..</small>
+                      </p>
+                      <p class="card-text" fxLayout="row" fxLayoutAlign="start stretch">
+                        <span fxFlex="30">FROM</span>
+                        <span class="badge badge-info" fxLayout="row" fxLayoutAlign="start center">{{session.startDate}}</span>
+                      </p>
+                      <p class="card-text" fxLayout="row" fxLayoutAlign="start stretch">
+                        <span fxFlex="30">TO</span>
+                        <span class="badge badge-info" fxLayout="row" fxLayoutAlign="start center">{{session.endDate}}</span>
+                      </p>
+                      <p class="card-text" fxLayout="row" fxLayoutAlign="start stretch">
+                        <span fxFlex="30">PRICE</span>
+                        <span class="badge badge-success" fxLayout="row" fxLayoutAlign="start center">{{session.price}} EUR</span>
+                      </p>
+                      <p class="card-text" fxLayout="row" fxLayoutAlign="start stretch" *ngIf="session.theater">
+                        <span fxFlex="30">THEATER</span>
+                        <span class="badge badge-success" fxLayout="row" fxLayoutAlign="start center">{{session.theater.name}} EUR</span>
+                      </p>
+                      <p class="card-text" fxLayout="row" fxLayoutAlign="start stretch">
+                        <span fxFlex="30">RATING</span>
+                        <span fxLayout="row" fxLayoutAlign="start center">
+                          <ng-template #t let-fill="fill">
+                            <span class="star" [class.full]="fill === 100">
+                              <span class="half" [style.width.%]="fill"><em class="fa fa-star text-warning"></em></span><em class="fa fa-star-o text-warning cursor"></em>
+                            </span>
+                          </ng-template>
+                          <ngb-rating [(rate)]="session.vote_average" [starTemplate]="t" [readonly]="true" max="10"></ngb-rating>
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card border-secondary mb-3" style="max-width: 25rem;">
+                <div class="card-body" fxLayout="row wrap" fxLayoutAlign="center center">
+                  
+                  <ng-container *ngFor='let in of counter(session.theater?.num_places) ;let i = index'>
+                    <span fxFlex="10" *ngIf="checkTickets(i+1)"><i class="fas fa-couch disable"></i></span>
+                    <span fxFlex="10" *ngIf="!checkTickets(i+1)">
+                      <i class="fas fa-couch enable" (click)="openCreateModal(content1, i+1)"></i>
+                    </span>
+                    <ng-template #content1 let-c="close" let-d="dismiss">
+                      <div class="modal-header">
+                        <h4 class="modal-title" id="modal-basic-title">Buy a ticket</h4>
+                        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form>
+                          <div class="form-group">
+                            <label for="name">Full name</label>
+                            <input type="text" class="form-control" [(ngModel)]="ticket.fullname" name="name"
+                              id="name" placeholder="Full name" required [readonly]="imgURL">
+                          </div>
+                          <p class="card-text" fxLayout="row" fxLayoutAlign="start stretch">
+                            <span fxFlex="30">PRICE</span>
+                            <span class="badge badge-success" fxLayout="row" fxLayoutAlign="start center">{{session.price}} EUR</span>
+                          </p>
+                          <div *ngIf="imgURL" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="15">
+                            <img [src]="imgURL" >
+                            <b>Your ticket is the QRcode, Please take a picture of it.</b>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer" *ngIf="showPayBtn">
+                        <div class="continuer pay" *ngIf="paypalLoad">Paypal button is loading</div>
+                        <div id="paypal-button-container" fxLayout="column" fxLayoutAlign="center stretch"></div>
+                      </div>
+                  </ng-template>
+                </ng-container>
+                  
+                </div>
+                <div class="card-footer bg-transparent border-secondary" fxLayout="row" fxLayoutAlign="center center">
+                  <b>THE MONITOR SIDE</b>
+                </div>
+              </div>
+        
+          </div>
+        
+      </div>
+
+      
 
 </div>

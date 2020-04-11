@@ -30,6 +30,7 @@ import { DateTimeAdapter, OWL_DATE_TIME_FORMATS, OWL_DATE_TIME_LOCALE } from 'ng
 import { MomentDateTimeAdapter } from 'ng-pick-datetime-moment';
 import { SessionComponent } from './components/session/session.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { SessionsClientComponent } from './components/sessions-client/sessions-client.component';
 
 export const MY_CUSTOM_FORMATS = {
   fullPickerInput: 'YYYY-MM-DD HH:mm:ss',
@@ -54,7 +55,8 @@ export const MY_CUSTOM_FORMATS = {
     CinemaComponent,
     TheatersComponent,
     SessionComponent,
-    FooterComponent
+    FooterComponent,
+    SessionsClientComponent
   ],
   imports: [
     BrowserModule,

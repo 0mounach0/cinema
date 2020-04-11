@@ -45,14 +45,15 @@ export class HomeComponent implements OnInit {
 
       L.marker([+c.latitude, +c.longitude], {icon: myIcon})
        .bindPopup(
-         '<a style="color: rgb(71, 71, 71);cursor: pointer;font-size: 2em;text-decoration: none;" href="'
-         +location.origin+'/cinema/'+c.id+'" target="_blank">' +
+         '<div onmouseover="this.style.opacity=0.5;" onmouseout="this.style.opacity=1;"><a'+
+         ' style="color: rgb(71, 71, 71);cursor: pointer;font-size: 2em;text-decoration: none;" href="'
+         +location.origin+'/cinema/'+c.id+'/sessions" target="_blank">' +
           c.name.toString()
         +'<a></br>'+
         '<a style="cursor: pointer;" href="'
-        +location.origin+'/cinema/'+c.id+'" target="_blank">'+
+        +location.origin+'/cinema/'+c.id+'/sessions" target="_blank">'+
         '<img style="display: block;margin-left: auto;margin-right: auto;" src="../../../assets/cinema.png" width="150" alt="cinema">'
-        +'</a>'
+        +'</a></div>'
        )
        .addTo(cinemaMap)
        .openPopup();  
@@ -82,8 +83,8 @@ export class HomeComponent implements OnInit {
 
 
   //-------------
-  gotoCinema(){
-    console.log('gooooooooo');
+  gotoCinema(id){
+    console.log(id);
   }
 
 }

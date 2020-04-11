@@ -8,6 +8,7 @@ import { SessionsComponent } from './components/sessions/sessions.component';
 import { LoginComponent } from './components/login/login.component';
 import { CinemaComponent } from './components/cinema/cinema.component';
 import { SessionComponent } from './components/session/session.component';
+import { SessionsClientComponent } from './components/sessions-client/sessions-client.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'movies', component: MoviesComponent },
   { path: 'login', component: LoginComponent },
   { path: 'cinema/:id/settings', component: CinemaComponent },
+  { path: 'cinema/:id/sessions', component: SessionsClientComponent },
   { path: 'session/:id', component: SessionComponent },
   { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];

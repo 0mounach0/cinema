@@ -7,7 +7,7 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TheaterService } from 'src/app/services/theater/theater.service';
 import { Theater } from 'src/app/models/theater/theater';
-
+import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-sessions',
@@ -23,6 +23,9 @@ export class SessionsComponent implements OnInit {
   cinema: Cinema = new Cinema();
   session: Session = new Session();
   selectedTheater: string = "0";
+  expanded: boolean = true;
+  date_picked: NgbDateStruct;
+  show_date_cnl: boolean = false;
 
   constructor(
     private router: Router,
@@ -51,6 +54,25 @@ export class SessionsComponent implements OnInit {
 
     let promise = new Promise((resolve, reject) => {
       this.cinemaService.getCinemaSession(this.cinema_id)
+     .subscribe((response: any) => {
+       console.log(response);
+       this.sessions = response.body;
+       resolve(response);
+       } ,
+     err => {
+       console.log(  err.status );
+       reject(err);
+      });
+    });
+
+    return promise;
+  }
+
+  /* ----------------------- */
+  getCinemaSessionsByDate(start_date, end_date) {
+
+    let promise = new Promise((resolve, reject) => {
+      this.cinemaService.getCinemaSessionByDate(this.cinema_id, start_date, end_date)
      .subscribe((response: any) => {
        console.log(response);
        this.sessions = response.body;
@@ -141,6 +163,7 @@ export class SessionsComponent implements OnInit {
     this.createSessionService().then((res: any) => {
       this.modalService.dismissAll();
       this.getCinemaSessions();
+      this.session = new Session();
     });
     
   }
@@ -177,39 +200,6 @@ export class SessionsComponent implements OnInit {
   }
 
 
-  //---------------------------------
-  openUpdateModal(content, s) {
-    this.modalService.open(content, { size: 'lg', scrollable: true });
-    this.session = s;
-  }
-
-  /* ----------------------- */
-  updateSessionService() {
-    let promise = new Promise((resolve, reject) => {
-      this.sessionService.updateSession(this.session)
-     .subscribe((response: any) => {
-       console.log(response);
-       resolve(response);
-       } ,
-     err => {
-       console.log(  err.status );
-       reject(err);
-      });
-    });
-
-    return promise;
-  }
-
-
-  /* ----------------- */
-  updateSession() {
-
-    this.updateSessionService().then((res: any) => {
-      this.modalService.dismissAll();
-      this.getCinemaSessions();
-    });
-    
-  }
 
   /* ----------------------- */
   getCinemaTheaters() {
@@ -232,6 +222,7 @@ export class SessionsComponent implements OnInit {
 
   //---------------------
   pickMovie(movie) {
+    this.expanded = false;
     this.session.movie_id = movie.id;
     this.session.original_title = movie.original_title;
     this.session.overview = movie.overview;
@@ -240,6 +231,37 @@ export class SessionsComponent implements OnInit {
     this.session.status = movie.status;
     this.session.title = movie.title;
     this.session.vote_average = movie.vote_average.toString();
+  }
+
+
+  //-----------------
+
+  formatDate_pick(dt){
+    
+    return `${
+      dt.year.toString().padStart(4, '0')}-${
+      dt.month.toString().padStart(2, '0')}-${
+      dt.day.toString().padStart(2, '0')}`;
+    
+  }
+
+  datePicked(){
+    let start_date = this.formatDate_pick(this.date_picked) + " 00:00:00"; 
+    let end_date = this.formatDate_pick(this.date_picked) + " 23:59:00";
+    this.getCinemaSessionsByDate(start_date, end_date);
+    this.show_date_cnl = true;
+  }
+
+  selectAllCinemaSessions() {
+    this.show_date_cnl = false;
+    this.date_picked = null;
+    this.getCinemaSessions();
+  }
+
+
+  //---------------
+  gotoSession(s_id) {
+    this.router.navigate(['/session/'+s_id]);
   }
 
 }
