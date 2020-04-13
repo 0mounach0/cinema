@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { CinemaService } from 'src/app/services/cinema/cinema.service';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { CityService } from 'src/app/services/city/city.service';
@@ -9,6 +9,10 @@ import { City } from 'src/app/models/city/city';
 import {Location, Appearance} from '@angular-material-extensions/google-maps-autocomplete';
 import PlaceResult = google.maps.places.PlaceResult;
 import { ThrowStmt } from '@angular/compiler';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { App } from 'src/app/models/app/app';
+import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cinemas',
@@ -24,6 +28,7 @@ export class CinemasComponent implements OnInit {
   cityExist: boolean = true;
   cinema: Cinema = new Cinema();
   newCity: City = new City();
+  app: App = new App();
 
   public appearance = Appearance;
   public selectedAddress: PlaceResult;
@@ -33,15 +38,53 @@ export class CinemasComponent implements OnInit {
   constructor(private cinemaService: CinemaService,
               private cityService: CityService,
               config: NgbModalConfig, 
-              private modalService: NgbModal) { 
+              private authService: AuthService,
+              private modalService: NgbModal,
+              private router: Router,
+              @Inject(SESSION_STORAGE) private storage: StorageService) { 
         config.backdrop = 'static';
         config.keyboard = false;
     }
 
   /* ----------------------- */
   ngOnInit(): void {
-    this.getAllCinemas();
-    this.getAllCities();
+
+    this.getUser().then((data: any) => {
+      
+      this.getAllCinemas();
+      this.getAllCities();
+
+    }).catch(err => {
+        this.app.error = true; 
+        this.app.email = null; 
+        this.app.status = 'NOT AUTHORIZED';
+        this.app.username = '*** NONE ***'; 
+        this.app.role = null;
+        
+        this.storage.set("app", this.app);
+        this.router.navigate(['/home']);
+    });
+
+
+  }
+
+  //------------
+  getUser() {
+    let promise = new Promise((resolve, reject) => {
+
+        this.authService.getUser()
+        .subscribe((response: any) => {
+
+          resolve(response);
+
+        } ,
+        err => {
+          reject(err);
+        }
+      );
+    });
+    
+    return promise;
   }
 
   /* ----------------------- */
@@ -50,12 +93,12 @@ export class CinemasComponent implements OnInit {
     let promise = new Promise((resolve, reject) => {
       this.cinemaService.getAllCinemas()
      .subscribe((response: any) => {
-       console.log(response);
+       //console.log(response);
        this.cinemas = response.body;
        resolve(response);
        } ,
      err => {
-       console.log(  err.status );
+       //console.log(  err.status );
        reject(err);
       });
     });
@@ -69,12 +112,12 @@ export class CinemasComponent implements OnInit {
     let promise = new Promise((resolve, reject) => {
       this.cityService.getAllCities()
      .subscribe((response: any) => {
-       console.log(response);
+       //console.log(response);
        this.cities = response.body;
        resolve(response);
        } ,
      err => {
-       console.log(  err.status );
+       //console.log(  err.status );
        reject(err);
       });
     });
@@ -118,7 +161,7 @@ export class CinemasComponent implements OnInit {
        resolve(response);
        } ,
      err => {
-       console.log(  err.status );
+       //console.log(  err.status );
        reject(err);
       });
     });
@@ -183,11 +226,11 @@ export class CinemasComponent implements OnInit {
     let promise = new Promise((resolve, reject) => {
       this.cinemaService.createCinema(this.cinema)
      .subscribe((response: any) => {
-       console.log(response);
+       //console.log(response);
        resolve(response);
        } ,
      err => {
-       console.log(  err.status );
+       //console.log(  err.status );
        reject(err);
       });
     });
@@ -200,11 +243,11 @@ export class CinemasComponent implements OnInit {
     let promise = new Promise((resolve, reject) => {
       this.cinemaService.updateCinema(this.cinema)
      .subscribe((response: any) => {
-       console.log(response);
+       //console.log(response);
        resolve(response);
        } ,
      err => {
-       console.log(  err.status );
+       //console.log(  err.status );
        reject(err);
       });
     });
@@ -217,11 +260,11 @@ export class CinemasComponent implements OnInit {
     let promise = new Promise((resolve, reject) => {
       this.cityService.createCity(this.newCity)
      .subscribe((response: any) => {
-       console.log(response);
+       //console.log(response);
        resolve(response);
        } ,
      err => {
-       console.log(  err.status );
+       //console.log(  err.status );
        reject(err);
       });
     });
@@ -234,12 +277,12 @@ export class CinemasComponent implements OnInit {
   //-----------------------
 
   onAutocompleteSelected(result: PlaceResult) {
-    console.log('onAutocompleteSelected: ', result);
+    //console.log('onAutocompleteSelected: ', result);
     this.cinema.address = result.formatted_address;
   }
 
   onLocationSelected(location: Location) {
-    console.log('onLocationSelected: ', location);
+    //console.log('onLocationSelected: ', location);
     this.cinema.latitude = location.latitude.toString();
     this.cinema.longitude = location.longitude.toString();
   }

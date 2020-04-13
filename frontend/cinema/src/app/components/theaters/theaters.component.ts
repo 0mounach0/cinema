@@ -34,7 +34,7 @@ export class TheatersComponent implements OnInit {
 
   ngOnInit() {
     this.cinema_id = this.route.snapshot.paramMap.get("id");
-    console.log("hereee : " + this.cinema_id);
+    //console.log("hereee : " + this.cinema_id);
 
     this.getCinemaInfos();
     this.getCinemaTheaters();
@@ -46,12 +46,12 @@ export class TheatersComponent implements OnInit {
     let promise = new Promise((resolve, reject) => {
       this.cinemaService.getCinemaTheaters(this.cinema_id)
      .subscribe((response: any) => {
-       console.log(response);
+       //console.log(response);
        this.theaters = response.body;
        resolve(response);
        } ,
      err => {
-       console.log(  err.status );
+       //console.log(  err.status );
        reject(err);
       });
     });
@@ -65,12 +65,12 @@ export class TheatersComponent implements OnInit {
     let promise = new Promise((resolve, reject) => {
       this.cinemaService.getOneCinema(this.cinema_id)
      .subscribe((response: any) => {
-       console.log(response);
+       //console.log(response);
        this.cinema = response.body;
        resolve(response);
        } ,
      err => {
-       console.log(  err.status );
+       //console.log(  err.status );
        reject(err);
       });
     });
@@ -89,11 +89,11 @@ export class TheatersComponent implements OnInit {
     let promise = new Promise((resolve, reject) => {
       this.theaterService.createTheater(this.theater)
      .subscribe((response: any) => {
-       console.log(response);
+       //console.log(response);
        resolve(response);
        } ,
      err => {
-       console.log(  err.status );
+       //console.log(  err.status );
        reject(err);
       });
     });
@@ -128,7 +128,7 @@ export class TheatersComponent implements OnInit {
        resolve(response);
        } ,
      err => {
-       console.log(  err.status );
+       //console.log(  err.status );
        reject(err);
       });
     });
@@ -156,11 +156,11 @@ export class TheatersComponent implements OnInit {
     let promise = new Promise((resolve, reject) => {
       this.theaterService.updateTheater(this.theaterUpdate)
      .subscribe((response: any) => {
-       console.log(response);
+       //console.log(response);
        resolve(response);
        } ,
      err => {
-       console.log(  err.status );
+       //console.log(  err.status );
        reject(err);
       });
     });

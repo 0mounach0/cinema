@@ -14,7 +14,6 @@ import { SessionsClientComponent } from './components/sessions-client/sessions-c
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'cinemas', component: CinemasComponent },
-  { path: 'movies', component: MoviesComponent },
   { path: 'login', component: LoginComponent },
   { path: 'cinema/:id/settings', component: CinemaComponent },
   { path: 'cinema/:id/sessions', component: SessionsClientComponent },

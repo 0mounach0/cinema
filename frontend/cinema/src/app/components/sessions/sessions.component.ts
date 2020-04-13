@@ -42,7 +42,7 @@ export class SessionsComponent implements OnInit {
 
   ngOnInit() {
     this.cinema_id = this.route.snapshot.paramMap.get("id");
-    console.log("hereee : " + this.cinema_id);
+    //console.log("hereee : " + this.cinema_id);
 
     this.getCinemaInfos();
     this.getCinemaTheaters();
@@ -55,12 +55,12 @@ export class SessionsComponent implements OnInit {
     let promise = new Promise((resolve, reject) => {
       this.cinemaService.getCinemaSession(this.cinema_id)
      .subscribe((response: any) => {
-       console.log(response);
+       //console.log(response);
        this.sessions = response.body;
        resolve(response);
        } ,
      err => {
-       console.log(  err.status );
+       //console.log(  err.status );
        reject(err);
       });
     });
@@ -74,12 +74,12 @@ export class SessionsComponent implements OnInit {
     let promise = new Promise((resolve, reject) => {
       this.cinemaService.getCinemaSessionByDate(this.cinema_id, start_date, end_date)
      .subscribe((response: any) => {
-       console.log(response);
+       //console.log(response);
        this.sessions = response.body;
        resolve(response);
        } ,
      err => {
-       console.log(  err.status );
+       //console.log(  err.status );
        reject(err);
       });
     });
@@ -93,12 +93,12 @@ export class SessionsComponent implements OnInit {
     let promise = new Promise((resolve, reject) => {
       this.cinemaService.getOneCinema(this.cinema_id)
      .subscribe((response: any) => {
-       console.log(response);
+       //console.log(response);
        this.cinema = response.body;
        resolve(response);
        } ,
      err => {
-       console.log(  err.status );
+       //console.log(  err.status );
        reject(err);
       });
     });
@@ -124,11 +124,11 @@ export class SessionsComponent implements OnInit {
     let promise = new Promise((resolve, reject) => {
       this.sessionService.createSession(this.session)
      .subscribe((response: any) => {
-       console.log(response);
+       //console.log(response);
        resolve(response);
        } ,
      err => {
-       console.log(  err.status );
+       //console.log(  err.status );
        reject(err);
       });
     });
@@ -183,7 +183,7 @@ export class SessionsComponent implements OnInit {
        resolve(response);
        } ,
      err => {
-       console.log(  err.status );
+       //console.log(  err.status );
        reject(err);
       });
     });
@@ -207,12 +207,12 @@ export class SessionsComponent implements OnInit {
     let promise = new Promise((resolve, reject) => {
       this.cinemaService.getCinemaTheaters(this.cinema_id)
      .subscribe((response: any) => {
-       console.log(response);
+       //console.log(response);
        this.theaters = response.body;
        resolve(response);
        } ,
      err => {
-       console.log(  err.status );
+       //console.log(  err.status );
        reject(err);
       });
     });

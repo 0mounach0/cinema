@@ -31,12 +31,10 @@
           <li *ngIf="appStore.status == 'LOGGED'" class="nav-item dropdown" >
             <div ngbDropdown class="d-inline-block">
               <button class="btn" id="dropdownBasic1" ngbDropdownToggle>
-                <img src="../../../assets/admin.png" width="45" class="rounded-circle admin">
+                <img src="../../../assets/admin.png" width="35" class="rounded-circle admin">
                 <span class="username-top">  {{appStore.username}}  </span>
               </button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <!-- <button ngbDropdownItem routerLink="/profile">Compte</button>
-                <div class="dropdown-divider"></div> -->
                 <button ngbDropdownItem (click)="logout()" >Logout</button>
               </div>
             </div>

@@ -29,6 +29,7 @@
     "@types/leaflet": "^1.5.11",
     "angular-webstorage-service": "^1.0.2",
     "bootstrap": "^4.4.1",
+    "jquery": "^3.5.0",
     "leaflet": "^1.6.0",
     "moment": "^2.24.0",
     "ng-pick-datetime": "^7.0.0",

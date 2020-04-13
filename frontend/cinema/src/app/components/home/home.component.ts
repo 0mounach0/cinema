@@ -3,6 +3,7 @@ import * as L from 'leaflet';
 import { CinemaService } from 'src/app/services/cinema/cinema.service';
 import { Cinema } from 'src/app/models/cinema/cinema';
 import { Router } from '@angular/router';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,7 @@ export class HomeComponent implements OnInit {
     private cinemaService: CinemaService,
     private router: Router
   ) { }
-
+  
   ngOnInit(){
 
     const cinemaMap = L.map('cinemaMap').setView([48.8534, 2.3488], 11);
@@ -45,19 +46,35 @@ export class HomeComponent implements OnInit {
 
       L.marker([+c.latitude, +c.longitude], {icon: myIcon})
        .bindPopup(
-         '<div onmouseover="this.style.opacity=0.5;" onmouseout="this.style.opacity=1;"><a'+
-         ' style="color: rgb(71, 71, 71);cursor: pointer;font-size: 2em;text-decoration: none;" href="'
-         +location.origin+'/cinema/'+c.id+'/sessions" target="_blank">' +
+         '<div class="cine_'+c.id+'" onmouseover="this.style.opacity=0.5;" onmouseout="this.style.opacity=1;"><a'+
+         ' class="cine_'+c.id+'" style="color: rgb(71, 71, 71);cursor: pointer;font-size: 2em;text-decoration: none;">'+
           c.name.toString()
         +'<a></br>'+
-        '<a style="cursor: pointer;" href="'
-        +location.origin+'/cinema/'+c.id+'/sessions" target="_blank">'+
-        '<img style="display: block;margin-left: auto;margin-right: auto;" src="../../../assets/cinema.png" width="150" alt="cinema">'
+        '<a style="cursor: pointer;" class="cine_'+c.id+'">'+
+        '<img class="cine_'+c.id+'" style="display: block;margin-left: auto;margin-right: auto;" src="../../../assets/cinema.png" width="150" alt="cinema">'
         +'</a></div>'
        )
        .addTo(cinemaMap)
-       .openPopup();  
+       .openPopup()
+       .on('popupopen' , () => {
+        
+        $(document).ready(() => {
+          $("div[class*='cine_'").click( (event) => {
+            let cine_id = $(event.target).attr('class').split("cine_").pop();
+            this.router.navigate(['/cinema/'+cine_id+'/sessions']);
+          });
+        });
+
+      }); 
+
     });
+
+    $(document).ready(() => {
+      $("div[class*='cine_'").click( (event) => {
+        let cine_id = $(event.target).attr('class').split("cine_").pop();
+        this.router.navigate(['/cinema/'+cine_id+'/sessions']);
+      });
+   });
     
   }
 
@@ -68,23 +85,17 @@ export class HomeComponent implements OnInit {
     let promise = new Promise((resolve, reject) => {
       this.cinemaService.getAllCinemas()
      .subscribe((response: any) => {
-       console.log(response);
+       //console.log(response);
        this.cinemas = response.body;
        resolve(response);
        } ,
      err => {
-       console.log(  err.status );
+       //console.log(  err.status );
        reject(err);
       });
     });
 
     return promise;
-  }
-
-
-  //-------------
-  gotoCinema(id){
-    console.log(id);
   }
 
 }

@@ -36,12 +36,12 @@ export class MoviesComponent implements OnInit {
     let promise = new Promise((resolve, reject) => {
       this.movieService.searchMovies(this.query)
      .subscribe((response: any) => {
-       console.log(response);
+       //console.log(response);
        this.movies = response.body.results;
        resolve(response);
        } ,
      err => {
-       console.log(  err.status );
+       //console.log(  err.status );
        reject(err);
       });
     });

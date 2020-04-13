@@ -46,7 +46,7 @@ export class SessionComponent implements OnInit {
 
   ngOnInit() {
     this.session_id = this.route.snapshot.paramMap.get("id");
-    console.log(this.session_id);
+    //console.log(this.session_id);
 
     this.getSessionInfos();
     this.getSessionTickets();
@@ -72,12 +72,12 @@ export class SessionComponent implements OnInit {
     let promise = new Promise((resolve, reject) => {
       this.sessionService.getOneSession(this.session_id)
      .subscribe((response: any) => {
-       console.log(response);
+       //console.log(response);
        this.session = response.body;
        resolve(response);
        } ,
      err => {
-       console.log(  err.status );
+       //console.log(  err.status );
        reject(err);
       });
     });
@@ -91,12 +91,12 @@ export class SessionComponent implements OnInit {
     let promise = new Promise((resolve, reject) => {
       this.sessionService.getSessionTickets(this.session_id)
      .subscribe((response: any) => {
-       console.log(response);
+       //console.log(response);
        this.tickets = response.body;
        resolve(response);
        } ,
      err => {
-       console.log(  err.status );
+       //console.log(  err.status );
        reject(err);
       });
     });
@@ -121,11 +121,11 @@ export class SessionComponent implements OnInit {
     let promise = new Promise((resolve, reject) => {
       this.ticketService.createTicket(this.ticket)
      .subscribe((response: any) => {
-       console.log(response);
+       //console.log(response);
        resolve(response);
        } ,
      err => {
-       console.log(  err.status );
+       //console.log(  err.status );
        reject(err);
       });
     });
@@ -153,7 +153,7 @@ export class SessionComponent implements OnInit {
        resolve(response);
        } ,
      err => {
-       console.log(  err.status );
+       //console.log(  err.status );
        reject(err);
       });
     });
@@ -228,7 +228,7 @@ export class SessionComponent implements OnInit {
                   description: this.session.original_title,
                   items: [
                     {
-                      name: this.session.startDate + " --> " + this.session.endDate,
+                      name: this.session.title + " ("+ this.session.startDate +") ",
                       quantity : 1,
                       unit_amount: {
                         currency_code : "EUR",

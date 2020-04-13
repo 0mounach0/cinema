@@ -3,6 +3,8 @@ server:
   servlet:
     session:
       timeout: 43200
+      cookie:
+        http-only: false
 eureka:
   client:
     enabled: true

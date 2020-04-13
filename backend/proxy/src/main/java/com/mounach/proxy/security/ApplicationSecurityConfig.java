@@ -2,10 +2,16 @@ package com.mounach.proxy.security;
 
 import com.mounach.proxy.repository.UserRepository;
 import com.mounach.proxy.service.CustomUserDetailsService;
+import org.apache.tomcat.util.http.Rfc6265CookieProcessor;
+import org.apache.tomcat.util.http.SameSiteCookies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.embedded.tomcat.TomcatContextCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -21,6 +27,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.session.web.http.DefaultCookieSerializer;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -30,6 +37,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collection;
 
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Configuration
@@ -54,7 +62,6 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint())
                 .and()
-                //.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()).and()
                 .cors().and()
                 .csrf().disable()
                 .authorizeRequests()
@@ -66,8 +73,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers(HttpMethod.GET,"/cinema-service/city/{id}")
                 .permitAll()
-                .antMatchers(HttpMethod.GET,"/cinema-service/cinema/{id}/theaters")
-                .permitAll()
+                //.antMatchers(HttpMethod.GET,"/cinema-service/cinema/{id}/theaters")
+                //.permitAll()
                 .antMatchers(HttpMethod.GET,"/cinema-service/cinema/{id}/sessions")
                 .permitAll()
                 .antMatchers(HttpMethod.GET,"/cinema-service/session/{id}")
@@ -177,6 +184,12 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 response.setStatus(403);
             }
         };
+    }
+
+    @EventListener
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+        DefaultCookieSerializer cookieSerializer = getApplicationContext().getBean(DefaultCookieSerializer.class);
+        cookieSerializer.setSameSite("None");
     }
 
 }

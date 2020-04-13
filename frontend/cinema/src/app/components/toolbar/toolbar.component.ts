@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { StorageService, SESSION_STORAGE } from 'angular-webstorage-service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { App } from 'src/app/models/app/app';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-toolbar',
@@ -14,7 +15,8 @@ export class ToolbarComponent implements OnInit {
 
   constructor(
     @Inject(SESSION_STORAGE) private storage: StorageService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
     ) { }
 
   ngOnInit() {
@@ -44,6 +46,7 @@ export class ToolbarComponent implements OnInit {
         this.app.role = null;
         
         this.storage.set("app", this.app);
+        this.router.navigate(['/home']);
       }
     );
   });

@@ -34,7 +34,8 @@
                     <div class="form-group">
                       <div class="input-group">
                         <input class="form-control" placeholder="yyyy-mm-dd" (dateSelect)="datePicked()" readonly
-                               name="dp" [(ngModel)]="date_picked" ngbDatepicker #d="ngbDatepicker">
+                               name="dp" [(ngModel)]="date_picked" ngbDatepicker #d="ngbDatepicker"
+                               [minDate]="date_today">
                         <div class="input-group-append">
                           <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
                             <i class="far fa-calendar-alt"></i>

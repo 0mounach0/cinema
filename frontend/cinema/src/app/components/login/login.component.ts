@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
 
   user: User = new User();
   app: App = new App();
+  error: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -34,6 +35,7 @@ export class LoginComponent implements OnInit {
 
         } ,
         err => {
+          this.error = true;
           reject(err);
         }
       );
@@ -63,7 +65,7 @@ export class LoginComponent implements OnInit {
       }
 
     }).catch((err: any) => {
-      console.log(err);
+      //console.log(err);
     }); 
 
   }

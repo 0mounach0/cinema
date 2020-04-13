@@ -16,6 +16,7 @@ export class SessionsClientComponent implements OnInit {
   cinema_id: any;
   cinema: Cinema = new Cinema();
   date_picked: NgbDateStruct;
+  date_today: NgbDateStruct;
   sessions: Array<Session> = new Array();
 
   constructor(
@@ -28,10 +29,11 @@ export class SessionsClientComponent implements OnInit {
   ngOnInit() {
 
     this.cinema_id = this.route.snapshot.paramMap.get("id");
-    console.log(this.cinema_id);
+    //console.log(this.cinema_id);
 
     this.getCinemaInfos();
 
+    this.date_today = this.calendar.getToday();
     this.date_picked = this.calendar.getToday();
     this.datePicked();
 
@@ -43,12 +45,12 @@ export class SessionsClientComponent implements OnInit {
     let promise = new Promise((resolve, reject) => {
       this.cinemaService.getOneCinema(this.cinema_id)
      .subscribe((response: any) => {
-       console.log(response);
+       //console.log(response);
        this.cinema = response.body;
        resolve(response);
        } ,
      err => {
-       console.log(  err.status );
+       //console.log(  err.status );
        reject(err);
       });
     });
@@ -62,12 +64,12 @@ export class SessionsClientComponent implements OnInit {
     let promise = new Promise((resolve, reject) => {
       this.cinemaService.getCinemaSessionByDate(this.cinema_id, start_date, end_date)
      .subscribe((response: any) => {
-       console.log(response);
+       //console.log(response);
        this.sessions = response.body;
        resolve(response);
        } ,
      err => {
-       console.log(  err.status );
+       //console.log(  err.status );
        reject(err);
       });
     });

@@ -11,8 +11,14 @@
       <form #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()">
         <input type="text" id="login" [(ngModel)]="user.username" class="fadeIn second" name="login" placeholder="login">
         <input type="password" id="password" [(ngModel)]="user.password" class="fadeIn third" name="login" placeholder="password">
-        <input type="submit" (click)="loginButton" class="fadeIn fourth" value="Log In">
+        <input type="submit" class="fadeIn fourth" value="Log In">
       </form>
+
+      <div>
+        <ngb-alert *ngIf="error == true" type="danger" (close)="error = false">
+          <strong>ERROR!</strong><span>Wrong username or password.</span>
+        </ngb-alert>
+      </div>
   
     </div>
 </div>
