@@ -115,6 +115,7 @@ export class SessionsComponent implements OnInit {
 
   //--------------------------------
   openCreateModal(content) {
+    this.getCinemaTheaters();
     this.modalService.open(content, { size: 'xl', scrollable: true });
   }
 
@@ -164,6 +165,7 @@ export class SessionsComponent implements OnInit {
       this.modalService.dismissAll();
       this.getCinemaSessions();
       this.session = new Session();
+      this.selectedTheater = "0";
     });
     
   }

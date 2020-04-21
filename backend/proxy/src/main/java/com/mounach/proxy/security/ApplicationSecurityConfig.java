@@ -65,7 +65,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET,"/cinema-service/cinema")
+                .antMatchers(HttpMethod.GET,"/movies-service/**")
                 .permitAll()
                 .antMatchers(HttpMethod.GET,"/cinema-service/cinema/{id}")
                 .permitAll()

@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: "0mounach0/cinema_front:snone"
+        image: "0mounach0/frontend:local"
         lifecycle:
           preStop:
             exec:

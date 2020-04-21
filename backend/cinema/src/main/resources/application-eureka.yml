@@ -7,9 +7,9 @@ spring:
   application:
     name: cinema-service
   datasource:
-    url: jdbc:mysql://15.188.232.94:3306/cinemadb?useSSL=false&allowPublicKeyRetrieval=true
-    password: olz3r_M00N
-    username: root
+    url: jdbc:mysql://${SPRING_MYSQL_DB_HOST}:${SPRING_MYSQL_HOST_PORT}/cinemadb?useSSL=false&allowPublicKeyRetrieval=true
+    password: ${SPRING_MYSQL_DB_PASSWORD}
+    username: ${SPRING_MYSQL_DB_USERNAME}
   jpa:
     properties:
       hibernate:

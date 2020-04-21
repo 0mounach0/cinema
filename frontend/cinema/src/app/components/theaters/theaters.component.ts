@@ -109,6 +109,7 @@ export class TheatersComponent implements OnInit {
     this.createTheaterService().then((res: any) => {
       this.modalService.dismissAll();
       this.getCinemaTheaters();
+      this.theater = new Theater();
     });
     
   }

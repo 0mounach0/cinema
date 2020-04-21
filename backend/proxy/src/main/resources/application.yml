@@ -11,9 +11,9 @@ spring:
   application:
     name: proxy-service
   datasource:
-    url: jdbc:mysql://15.188.232.94:3306/auth_cinema?useSSL=false&allowPublicKeyRetrieval=true
-    password: olz3r_M00N
-    username: root
+    url: jdbc:mysql://${SPRING_MYSQL_DB_HOST}:${SPRING_MYSQL_HOST_PORT}/auth_cinema?useSSL=false&allowPublicKeyRetrieval=true
+    password: ${SPRING_MYSQL_DB_PASSWORD}
+    username: ${SPRING_MYSQL_DB_USERNAME}
   jpa:
     properties:
       hibernate:
@@ -26,11 +26,11 @@ spring:
   session:
     store-type: redis
   redis:
-    host: 15.188.232.94
+    host: ${SPRING_REDIS_DB_HOST}
     database: 0
-    password: olz3r_M00N
+    password: ${SPRING_REDIS_DB_PASSWORD}
     timeout: 10000
-    port: 6379
+    port: ${SPRING_REDIS_HOST_PORT}
   cloud:
     kubernetes:
       enabled: true
