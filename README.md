@@ -1,5 +1,7 @@
 # MOUNACH CINEMA PLATEFORME
 
+![](architecture.png)
+
 A.	Backend :
 
 -	Java 8.
