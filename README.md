@@ -4,6 +4,9 @@
 
 - Youtube demo : https://www.youtube.com/watch?v=5X4VUgfR_L0&feature=youtu.be
 
+- Deployed version on : http://35.246.198.119/
+(Contact me for admin credentials)
+
 ![](architecture.png)
 
 A.	Backend :
